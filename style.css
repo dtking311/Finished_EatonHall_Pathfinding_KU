@@ -311,26 +311,33 @@ body { margin:0; }
 .map {
 
     display: block;
-    background-color: rgba(255,255,255, 0.05);
-    width: 70%;
-    height: 900px;
+    background-color: rgba(255,255,255, 0.45);
+    width: 80%;
+    height: 1270px;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 70px;
     margin-top: 45px;
     padding-top: 50px;
+    padding-bottom: 50px;
     border-radius: 80px;
 
 }
 
 .map_img {
 
+    position: absolute;
     display: block;
+    
     margin-left: auto;
     margin-right: auto;
+
+    height: 1250px;
+    width: 70%;
     opacity: 85%;
+    padding-left: 5%
    
-    border: solid 4px gray;
+    
 
 
 }
@@ -449,6 +456,59 @@ body { margin:0; }
     color: gray;
     font-size: 12px;
     font-style: italic;
+
+
+}
+
+.glue {
+
+    
+    margin-left: auto;
+    margin-right: auto;
+    height: 1250px;
+   
+
+
+}
+
+.logicmap {
+
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    height: 1250px;
+    width: 70%;
+    padding-left: 5%;
+
+    
+    
+
+
+}
+
+table, th, td {
+
+    border: 1px solid rgba(0, 0, 0, 0.051);
+    
+    color: red;
+
+    border-spacing: 0px;
+    border-collapse: separate;
+    table-layout: fixed;
+    height: 1250px;
+    
+    
+
+}
+
+td {
+
+    
+    width: 1.01%;
+    height: 1%;
+    font-size: 0.1px;
+    overflow: hidden;
+    
 
 
 }
