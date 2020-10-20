@@ -305,8 +305,9 @@ class Floor {
 }
 
 let searchroomid = document.getElementById('searchroomid').value;
+console.log(searchroomid);
 let searchbutton = document.getElementById('searchbutton');
-
+//let roomsearch = document.getElementById('roomsearch');
 
 class Search {
 
@@ -324,11 +325,13 @@ class Search {
 
 }
 
-//let roomsearch = document.getElementById('roomsearch');
-//put this in the main class
-let mainSearch = new Search()
-searchbutton.addEventListener('submit', Search.searchforroom());
 
+//put this in the main class
+let mainSearch = new Search();
+searchbutton.addEventListener('submit',  function () {
+  console.log("working");
+  Search.searchforroom()
+});
 
 
 
