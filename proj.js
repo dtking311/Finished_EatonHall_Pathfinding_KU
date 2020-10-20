@@ -304,10 +304,9 @@ class Floor {
 
 }
 
-let searchroomid = document.getElementById('searchroomid').value;
-console.log(searchroomid);
-let searchbutton = document.getElementById('searchbutton');
-//let roomsearch = document.getElementById('roomsearch');
+let searchroomid = document.getElementById('searchroomid');
+//console.log(searchroomid);
+let testroomid = "";
 
 class Search {
 
@@ -316,24 +315,19 @@ class Search {
 
     }
 
-    searchforroom()
-    {
-      searchroomid = searchroomid.toLowerCase();
-      console.log(searchroomid);
-    }
-
 
 }
 
 
 //put this in the main class
 let mainSearch = new Search();
-searchbutton.addEventListener('submit',  function () {
-  console.log("working");
-  Search.searchforroom()
+document.querySelector("#roomsearch").addEventListener('click',  function () {
+  searchroomid.addEventListener('keyup', (roomid) => {
+      testroomid = roomid.target.value.toLowerCase();
+      console.log(testroomid); /*to see each character that is entered*/
+    })
+    console.log(testroomid);
 });
-
-
 
 
 
