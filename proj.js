@@ -3,7 +3,7 @@
 class Map {
 
     constructor(name, level, resolution){
- 
+
      this.name = name;
      this.level = level;
      this.resolution = resolution;
@@ -12,44 +12,44 @@ class Map {
      let nodeMap = new Array(resolution);                          //    -- This is 2D array for holding Nodes  (Not all numbers)
      let map = new Array(resolution);                              //    -- This is 2D array for Displaying Info in HTML (All numbers)
 
-     for (let i = 0 ; i < (this.resolution) ; i++ ){             
-     
+     for (let i = 0 ; i < (this.resolution) ; i++ ){
+
          map[i] = new Array(parseInt(1 * resolution));
          nodeMap[i] = new Array(parseInt(1 * resolution));
-     
+
      }
      for (let x = 0; x < this.resolution; x++) {                     //    -- Initialize all indexes
-         for (let y = 0; y < parseInt(1 * this.resolution); y++) { 
-       
-             map[x][y] = '0'; 
+         for (let y = 0; y < parseInt(1 * this.resolution); y++) {
+
+             map[x][y] = '0';
              nodeMap[x][y] = null;
-         } 
-     } 
+         }
+     }
 
 
      this.nodeMap = nodeMap;
- 
+
 
 
 
 
 
      //------------------- Enter Path Data -------------------          this part could be strongly improved.
-     
 
 
 
-     
+
+
      map[47][15] = 2;
      map[62][17] = 2;
      map[47][43] = 2;
 
-     
+
      this.drawHoriz(map, 16, 43, 47);
      this.drawVert(map, 48, 61, 17);
-     
 
-     
+
+
 
 
      //----------------------------------------------------             to here
@@ -61,7 +61,7 @@ class Map {
 
      this.generateNodes(map, nodeMap);
      this.htmlMap(map);
- 
+
     }
     drawHoriz(map, from, to, horizontal_cord){
 
@@ -73,7 +73,7 @@ class Map {
         for(let i = from; i <= to; i++){
 
             map[i][horizontal_cord] = 1;
-    
+
          }
 
     }
@@ -103,13 +103,13 @@ class Map {
         }
 
     }
-   
+
     generateNodes(map, nodeMap){
 
 
         for ( let x = 0 ; x < this.resolution ; x++ ) {
             for ( let y = 0 ; y < parseInt(1 * this.resolution) ; y++ ) {
-               
+
                 if(map[x][y] == "1"){
 
                     nodeMap[x][y] = new Node(x,y);
@@ -126,47 +126,47 @@ class Map {
                     //
 
                 }
-                
+
 
             }
         }
-            
-          
-        
+
+
+
     }
     htmlMap(map){
- 
+
          console.log(this.resolution);  //diag
- 
+
          let htmltable = document.createElement("table");
- 
+
          for ( let x = 0 ; x < this.resolution ; x++ ) {
- 
+
              let row = document.createElement("tr");
- 
+
              for ( let y = 0 ; y < parseInt(1 * this.resolution) ; y++ ) {
-                
+
                  if(map[x][y] == '1'){
 
-                   
+
                     let cell = document.createElement("td");
                     cell.textContent = map[x][y];
                     cell.bgColor = "#0051BA";
                     cell.opacity = 25;
 
-                    
+
 
                     row.appendChild(cell);
 
                  } else if(map[x][y] == '2'){
 
-                   
+
                     let cell = document.createElement("td");
                     cell.textContent = map[x][y];
                     cell.bgColor = "#E8000D;";
                     cell.opacity = 25;
 
-                    
+
 
                     row.appendChild(cell);
 
@@ -182,19 +182,19 @@ class Map {
 
 
                  }
-                 
+
              }
              htmltable.appendChild(row);
          }
-             
-            
+
+
 
             document.getElementById("HTMLmap").append(htmltable);
-         
+
      }
- 
-     
- 
+
+
+
     }
 
 
@@ -203,10 +203,10 @@ class Map {
 
    //------------------------------------------------------------------------
 
-    
 
 
-class Node {                               
+
+class Node {
 
     constructor(x_coord, y_coord){
 
@@ -227,7 +227,7 @@ class Node {
 
     }
 }
-class EndNode {                                
+class EndNode {
 
     constructor(x_coord, y_coord, name){
 
@@ -284,7 +284,7 @@ class Pathfinder {
 
     constructor(){
 
-        
+
     }
 
 
@@ -296,28 +296,38 @@ class Floor {
 
     constructor(){
 
-        
+
     }
 
 
 
 
 }
+
+let searchroomid = document.getElementById('searchroomid').value;
+let searchbutton = document.getElementById('searchbutton');
+
 
 class Search {
 
-    constructor(){
+    constructor()
+    {
 
-        
     }
 
-
-
-
+    searchforroom()
+    {
+      searchroomid = searchroomid.toLowerCase();
+      console.log(searchroomid);
+    }
 
 
 }
 
+//let roomsearch = document.getElementById('roomsearch');
+//put this in the main class
+let mainSearch = new Search()
+searchbutton.addEventListener('submit', Search.searchforroom());
 
 
 
@@ -370,7 +380,3 @@ console.log("31: isNode:" +justTestingVariable31.isNode());
 console.log("31: isEndNode:" +justTestingVariable31.isEndNode());
 
 }
-
-
-
-
