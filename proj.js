@@ -216,39 +216,7 @@ class Node {
     }
     isEndNode(){
 
-
         return false;
-
-    }
-    isNode(){
-
-
-        return true;
-
-    }
-}
-class EndNode {                                
-
-    constructor(x_coord, y_coord, name){
-
-        this.x_coord = x_coord;
-        this.y_coord = y_coord;
-        this.name = name;
-
-    }
-    isEndNode(){
-
-        return true;
-
-    }
-    isNode(){
-
-        return true;
-
-    }
-    getName(){
-
-        return name;
 
     }
     getX(){
@@ -261,24 +229,28 @@ class EndNode {
         return this.y_coord;
 
     }
-
 }
 
+class EndNode extends Node {                                
 
+    constructor(x_coord, y_coord, name){
+        super(x_coord, y_coord);
+        this.name = name;
 
+    }
+    isEndNode(){
 
+        return true;
 
+    }
+    getName(){
 
+        return name;
 
-
-
-
-
-
-
-
-
-
+    }
+    
+}
+//---------------------------------------------------
 
 class Pathfinder {
 
@@ -291,7 +263,7 @@ class Pathfinder {
 
 
 }
-
+//---------------------------------------------------
 class Floor {
 
     constructor(){
@@ -344,7 +316,6 @@ if (justTestingVariable10 == true){
 
 let justTestingVariable11 = EatonBasement.getNode(47, 15);
 
-console.log("11: isNode:" + justTestingVariable11.isNode());
 console.log("11: isEndNode:" +justTestingVariable11.isEndNode());
 
 }
@@ -355,7 +326,6 @@ if (justTestingVariable20 == true){
 
 let justTestingVariable21 = EatonBasement.getNode(47, 16);
 
-console.log("21: isNode:" +justTestingVariable21.isNode());
 console.log("21: isEndNode:" +justTestingVariable21.isEndNode());
 
 }
@@ -366,7 +336,6 @@ if (justTestingVariable30 == true){
 
 let justTestingVariable31 = EatonBasement.getNode(99, 99);
 
-console.log("31: isNode:" +justTestingVariable31.isNode());
 console.log("31: isEndNode:" +justTestingVariable31.isEndNode());
 
 }
