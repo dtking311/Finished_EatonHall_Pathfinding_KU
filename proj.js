@@ -1,29 +1,103 @@
 
-
 class Map {
 
-    constructor(building, floor){
+    // Initialize entire Node map
+    constructor() {
 
-        this.building = building;
-        this.floor = floor;
+        // Declaring buildings
+        this.Eaton = new Building(4);
 
+        // Declare all nodes for each building
+        this.declareNodesEaton();
 
-        this.generateNodes(map, nodeMap);
+        // Make all connections between nodes for each building.
+        this.setupConnectionsEaton();
 
     } // end constructor
 
-    generateNodes(map, nodeMap){
-
+    declareNodesEaton() {
         
+        // Floor B
+        let floorB = this.Eaton.floor[0].nodes;
+        floorB[0] = new EndNode(66, 366, "Front Entrance");
+        floorB[1] = new Node(160, 371);
+        floorB[2] = new Node(171,484);
+        floorB[3] = new Node(231,371);
+        floorB[4] = new Node(370,416);
+        floorB[5] = new Node(380,480);
+        floorB[6] = new Node(349,476);
+        floorB[7] = new EndNode(365,652,"East Entrance");
+        floorB[8] = new EndNode(449,416,"Main Stairs");
+        floorB[9] = new EndNode(260,277,"Dean's Office");
+        floorB[10] = new Node(337,579);
+        floorB[11] = new EndNode(193,579,"Spahr Classroom");
+
+    }
+
+    setupConnectionsEaton() {
+
+        let floorB = this.Eaton.floor[0].nodes;
+        let floor1 = this.Eaton.floor[1].nodes;
+        let floor2 = this.Eaton.floor[2].nodes;
+        let floor3 = this.Eaton.floor[3].nodes;
+    
+        // Floor B
+
+        floorB[0].addVertex(floorB[1]);
+        floorB[1].addVertex(floorB[0]);
+        floorB[1].addVertex(floorB[2]);
+        floorB[1].addVertex(floorB[3]);
+        floorB[2].addVertex(floorB[1]);
+        floorB[2].addVertex(floorB[11]);
+        floorB[3].addVertex(floorB[1]);
+        floorB[3].addVertex(floorB[4]);
+        floorB[3].addVertex(floorB[9]);
+        floorB[4].addVertex(floorB[3]);
+        floorB[4].addVertex(floorB[5]);
+        floorB[4].addVertex(floorB[8]);
+        floorB[5].addVertex(floorB[4]);
+        floorB[5].addVertex(floorB[6]);
+        floorB[5].addVertex(floorB[7]);
+        floorB[6].addVertex(floorB[5]);
+        floorB[6].addVertex(floorB[10]);
+        floorB[7].addVertex(floorB[5]);
+        floorB[8].addVertex(floorB[4]);
+        floorB[9].addVertex(floorB[3]);
+        floorB[10].addVertex(floorB[6]);
+        floorB[10].addVertex(floorB[11]);
+        floorB[11].addVertex(floorB[2]);
+        floorB[11].addVertex(floorB[10]);
+
+    }
+
+} // end class Map
+
+class Building {
+    
+    constructor(numFloors) {
+        
+        // Initialize floors
+        this.floor = [];
+        for (var i = 0; i < numFloors; i++) {
+            this.floor[i] = new Floor;
+        }
+
     }
 
 }
 
+class Floor {
 
+    constructor() {
+        
+        // Declare array for Nodes
+        this.nodes = [];
 
+    }
 
+}
 
-   //------------------------------------------------------------------------
+//------------------------------------------------------------------------
 
 
 
@@ -97,7 +171,7 @@ class PriorityQueue {
     // Add element to queue according to priority
     enqueue(element, priority) {
         // create queue element from parameters
-        var q = new QElement(element, priority);
+        let q = new QElement(element, priority);
 
         for (var i = 0; i < this.queue.length; i++) {
 
@@ -122,7 +196,7 @@ class PriorityQueue {
     // Assigns the given element the given priority and repositions the element in the queue.
     reprioritizeElement(element, priority) {
         // Find index of the given element in the queue
-        var index = null;
+        let index = null;
         for (var i = 0; i < this.queue.length; i++) {
             if (this.queue[i].element === element) {
                 index = i;
@@ -200,16 +274,16 @@ class Pathfinder {
         // Start doing the pathing
         while (!this.priorityQueue.isEmpty()) {
             // get min Node from queue
-            var u = this.priorityQueue.dequeue().element;
-            var uIndex = this.nodes.indexOf(u);
+            let u = this.priorityQueue.dequeue().element;
+            let uIndex = this.nodes.indexOf(u);
             if (uIndex == -1)
                 throw "Pathfinder: element from priority queue is not in the array of nodes.";
 
             console.log("Current node is at " + u.x_coord + ' ' + u.y_coord);
 
             for (var i = 0; i < u.vertices.length; i++) {
-                var v = u.vertices[i];
-                var vIndex = this.nodes.indexOf(v);
+                let v = u.vertices[i];
+                let vIndex = this.nodes.indexOf(v);
                 if (vIndex == -1)
                     throw "Pathfinder: missing vertex node.";
 
@@ -217,7 +291,7 @@ class Pathfinder {
                 if (!this.visited.includes(v)) {
                     console.log("Examining vertex at " + v.x_coord + ' ' + v.y_coord);
                     // Calculate distance b/w Nodes u and v
-                    var dist = this.distances[uIndex] + this.distanceBetween(u, v);
+                    let dist = this.distances[uIndex] + this.distanceBetween(u, v);
 
                     if (dist < this.distances[vIndex]) {
                         this.distances[vIndex] = dist;
@@ -234,8 +308,8 @@ class Pathfinder {
         if (endNode instanceof Node == false)
             throw "Pathfinder: endNode must be a Node.";
 
-        var path = [];
-        var current = endNode;
+        let path = [];
+        let current = endNode;
         while (current != null) {
             path.push(current);
             current = this.previous[this.nodes.indexOf(current)];
@@ -247,17 +321,7 @@ class Pathfinder {
 
 
 //---------------------------------------------------
-class Floor {
 
-    constructor(){
-
-
-    }
-
-
-
-
-}
 
 let searchroomid = document.getElementById('searchroomid').value;
 //console.log(searchroomid);
@@ -289,57 +353,16 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
 });
 
 
-
-
-let nodes = [];
-nodes[0] = new EndNode(66, 366, "Front Entrance");
-nodes[1] = new Node(160, 371);
-nodes[2] = new Node(171,484);
-nodes[3] = new Node(231,371);
-nodes[4] = new Node(370,416);
-nodes[5] = new Node(380,480);
-nodes[6] = new Node(349,476);
-nodes[7] = new EndNode(365,652,"East Entrance");
-nodes[8] = new EndNode(449,416,"Main Stairs");
-nodes[9] = new EndNode(260,277,"Dean's Office");
-nodes[10] = new Node(337,579);
-nodes[11] = new EndNode(193,579,"Spahr Classroom");
-
-nodes[0].addVertex(nodes[1]);
-nodes[1].addVertex(nodes[0]);
-nodes[1].addVertex(nodes[2]);
-nodes[1].addVertex(nodes[3]);
-nodes[2].addVertex(nodes[1]);
-nodes[2].addVertex(nodes[11]);
-nodes[3].addVertex(nodes[1]);
-nodes[3].addVertex(nodes[4]);
-nodes[3].addVertex(nodes[9]);
-nodes[4].addVertex(nodes[3]);
-nodes[4].addVertex(nodes[5]);
-nodes[4].addVertex(nodes[8]);
-nodes[5].addVertex(nodes[4]);
-nodes[5].addVertex(nodes[6]);
-nodes[5].addVertex(nodes[7]);
-nodes[6].addVertex(nodes[5]);
-nodes[6].addVertex(nodes[10]);
-nodes[7].addVertex(nodes[5]);
-nodes[8].addVertex(nodes[4]);
-nodes[9].addVertex(nodes[3]);
-nodes[10].addVertex(nodes[6]);
-nodes[10].addVertex(nodes[11]);
-nodes[11].addVertex(nodes[2]);
-nodes[11].addVertex(nodes[10]);
-
-let pather = new Pathfinder(nodes, nodes[9]);
-let path = pather.getPathTo(nodes[11]);
-console.log("Shortest path to Spahr is:");
-while (path.length != 0) {
-    var n = path.pop();
-    console.log(n.x_coord + ' ' + n.y_coord);
-}
-
 //RUNTIME
 
-let EatonBasement = new Map("Eaton","B");
+let map = new Map;
 
+// Testing pathing
 
+let pather = new Pathfinder(map.Eaton.floor[0].nodes, map.Eaton.floor[0].nodes[9]);
+let path = pather.getPathTo(map.Eaton.floor[0].nodes[11]);
+console.log("Shortest path to Spahr is:");
+while (path.length != 0) {
+    let n = path.pop();
+    console.log(n.x_coord + ' ' + n.y_coord);
+}
