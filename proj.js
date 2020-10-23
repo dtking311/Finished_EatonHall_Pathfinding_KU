@@ -32,7 +32,7 @@ class Map {
         floorB[10] = new Node(337,579);
         floorB[11] = new EndNode(193,579,"Spahr Classroom");
 
-    }
+    } // end declareNodesEaton()
 
     setupConnectionsEaton() {
 
@@ -68,7 +68,7 @@ class Map {
         floorB[11].addVertex(floorB[2]);
         floorB[11].addVertex(floorB[10]);
 
-    }
+    } // end setupConnectionsEaton()
 
 } // end class Map
 
@@ -99,8 +99,6 @@ class Floor {
 
 //------------------------------------------------------------------------
 
-
-
 class Node {
 
     constructor(x_coord, y_coord){
@@ -109,28 +107,12 @@ class Node {
         this.y_coord = y_coord;
 
     }
-    isEndNode(){
 
-        return false;
-
-    }
-    //Note that getter methods are unnecessary if the variables are public.
-    getX(){
-
-        return this.x_coord;
-
-    }
-    getY(){
-
-        return this.y_coord;
-
-    }
+    // Adds the given node as a vertex which this Node connects to.
     addVertex(node) {
         this.vertices.push(node);
     }
-    getNumVertices() {
-        return this.vertices.length;
-    }
+
 }
 
 class EndNode extends Node {
@@ -140,18 +122,9 @@ class EndNode extends Node {
         this.name = name;
 
     }
-    isEndNode(){
-
-        return true;
-
-    }
-    getName(){
-
-        return name;
-
-    }
 
 }
+
 //---------------------------------------------------
 
 class QElement {
