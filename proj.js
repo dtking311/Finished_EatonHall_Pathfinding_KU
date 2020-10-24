@@ -310,8 +310,12 @@ class Search {
       for (let i = 0; i < this.nodes.length; i++) {
 
         let searching_room = this.nodes[i].name;
+        if (searching_room != undefined)
+        {
+          searching_room = searching_room.toLowerCase();// makes the node names all lower case
+        }
         //console.log(searching_room); /* printes every name of a node if they have one*/
-          if (searchRoom == searching_room)
+          if (searchRoom == searching_room )
           {
             return true;
           }
@@ -328,15 +332,15 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
       searchroomid = roomid.target.value.toLowerCase();
       //console.log(searchroomid); /*to see each character that is entered*/
     })
+    searchroomid = searchroomid.toLowerCase();// makes the input name lower case
     console.log(searchroomid);
-
     if (floor1search.vaildinput(searchroomid) == true)
     {
-      console.log("vaildinput works pog ");
+      console.log("yey ");
     }
     else
     {
-      console.log("vaildinput is not works pog ");
+      console.log("is not works pog ");
     }
 });
 
