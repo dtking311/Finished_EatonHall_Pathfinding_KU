@@ -96,7 +96,7 @@ class Node {
 }
 
 class EndNode extends Node {
-    
+
     // If EndNode has no roomNumber or name, set that parameter to null
     constructor(x_coord, y_coord, roomNumber, name){
         super(x_coord, y_coord);
@@ -290,6 +290,10 @@ class Search {
           searching_room_name = searching_room_name.toLowerCase();// makes the node names all lower case
         }
         //console.log(searching_room); /* printes every name of a node if they have one*/
+          if (searching_room_number != null && searching_room_number == searchRoom)
+          {
+            return true;
+          }
           if (searchRoom == searching_room_name )
           {
             return true;
@@ -304,11 +308,15 @@ class Search {
 
         let searching_room_name = this.nodes[i].name;
         let searching_room_number = this.nodes[i].roomNumber;
-        if (searching_room != undefined)
+        if (searching_room_name != undefined)
         {
           searching_room_name = searching_room_name.toLowerCase();// makes the node names all lower case
         }
         //console.log(searching_room); /* printes every name of a node if they have one*/
+          if (searching_room_number != null && searching_room_number == searchRoom)
+          {
+            return(i);
+          }
           if (searchRoom == searching_room_name )
           {
             return(i);
