@@ -16,7 +16,7 @@ class Map {
     } // end constructor
 
     declareNodesEaton() {
-        
+
         // Floor B
         let floorB = this.Eaton.floor[0].nodes;
         floorB[0] = new EndNode(66, 366, "Front Entrance");
@@ -40,7 +40,7 @@ class Map {
         let floor1 = this.Eaton.floor[1].nodes;
         let floor2 = this.Eaton.floor[2].nodes;
         let floor3 = this.Eaton.floor[3].nodes;
-    
+
         // Floor B
 
         floorB[0].addVertex(floorB[1]);
@@ -73,9 +73,9 @@ class Map {
 } // end class Map
 
 class Building {
-    
+
     constructor(numFloors) {
-        
+
         // Initialize floors
         this.floor = [];
         for (var i = 0; i < numFloors; i++) {
@@ -89,7 +89,7 @@ class Building {
 class Floor {
 
     constructor() {
-        
+
         // Declare array for Nodes
         this.nodes = [];
 
@@ -296,15 +296,16 @@ class Pathfinder {
 //---------------------------------------------------
 
 
-let searchroomid = document.getElementById('searchroomid').value;
-//console.log(searchroomid);
-let testroomid;
+let searchroomid;
 
 class Search {
 
-    constructor()
+    constructor(nodesArray)
     {
-
+      if (nodesArray instanceof Array)
+          this.nodes = nodesArray;
+      else
+          throw "Pathfinder: nodesArray must be an array.";
     }
 
     vaildinput()
@@ -313,11 +314,8 @@ class Search {
     }
 }
 
-
-//put this in the main class
-let mainSearch = new Search();
-
 document.querySelector("#searchbutton").addEventListener('click',  function () {
+  searchroomid = document.getElementById('searchroomid').value;
   document.querySelector("#searchroomid").addEventListener('keyup', (roomid) => {
       searchroomid = roomid.target.value.toLowerCase();
       //console.log(searchroomid); /*to see each character that is entered*/
@@ -329,6 +327,9 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
 //RUNTIME
 
 let map = new Map;
+
+//testing search
+let floor1search = new Search(map.Eaton.floor[0].nodes);
 
 // Testing pathing
 
