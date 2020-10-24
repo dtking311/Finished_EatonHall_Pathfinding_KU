@@ -295,24 +295,32 @@ class Pathfinder {
 
 //---------------------------------------------------
 
-
-let searchroomid;
-
 class Search {
 
-    constructor(nodesArray)
+    constructor(nodesArray_search)
     {
-      if (nodesArray instanceof Array)
-          this.nodes = nodesArray;
+      if (nodesArray_search instanceof Array)
+          this.nodes = nodesArray_search;
       else
-          throw "Pathfinder: nodesArray must be an array.";
+          throw "Search: nodesArray_search must be an array.";
     }
 
-    vaildinput()
+    vaildinput(searchRoom)
     {
+      for (let i = 0; i < this.nodes.length; i++) {
 
+        let searching_room = this.nodes[i].name;
+        //console.log(searching_room); /* printes every name of a node if they have one*/
+          if (searchRoom == searching_room)
+          {
+            return true;
+          }
+        }
+        return false;
     }
 }
+
+let searchroomid = document.getElementById('searchroomid').value;
 
 document.querySelector("#searchbutton").addEventListener('click',  function () {
   searchroomid = document.getElementById('searchroomid').value;
@@ -321,8 +329,16 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
       //console.log(searchroomid); /*to see each character that is entered*/
     })
     console.log(searchroomid);
-});
 
+    if (floor1search.vaildinput(searchroomid) == true)
+    {
+      console.log("vaildinput works pog ");
+    }
+    else
+    {
+      console.log("vaildinput is not works pog ");
+    }
+});
 
 //RUNTIME
 
@@ -330,6 +346,7 @@ let map = new Map;
 
 //testing search
 let floor1search = new Search(map.Eaton.floor[0].nodes);
+
 
 // Testing pathing
 
