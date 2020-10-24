@@ -284,7 +284,7 @@ class Search {
       for (let i = 0; i < this.nodes.length; i++) {
 
         let searching_room_name = this.nodes[i].name;
-        let searching_room_number = this.nodes[i].roomNumber;
+        let searching_room_number = this.nodes[i].roomNumber; 
         if (searching_room_name != undefined)
         {
           searching_room_name = searching_room_name.toLowerCase();// makes the node names all lower case
