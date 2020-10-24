@@ -279,13 +279,15 @@ class Search {
     vaildinput(searchRoom)
     {
       for (let i = 0; i < this.nodes.length; i++) {
-        let searching_room = this.nodes[i].name;
-        if (searching_room != undefined)
+
+        let searching_room_name = this.nodes[i].name;
+        let searching_room_number = this.nodes[i].roomNumber;
+        if (searching_room_name != undefined)
         {
-          searching_room = searching_room.toLowerCase();// makes the node names all lower case
+          searching_room_name = searching_room_name.toLowerCase();// makes the node names all lower case
         }
         //console.log(searching_room); /* printes every name of a node if they have one*/
-          if (searchRoom == searching_room )
+          if (searchRoom == searching_room_name )
           {
             return true;
           }
@@ -297,13 +299,14 @@ class Search {
     {
       for (let i = 0; i < this.nodes.length; i++) {
 
-        let searching_room = this.nodes[i].name;
+        let searching_room_name = this.nodes[i].name;
+        let searching_room_number = this.nodes[i].roomNumber;
         if (searching_room != undefined)
         {
-          searching_room = searching_room.toLowerCase();// makes the node names all lower case
+          searching_room_name = searching_room_name.toLowerCase();// makes the node names all lower case
         }
         //console.log(searching_room); /* printes every name of a node if they have one*/
-          if (searchRoom == searching_room )
+          if (searchRoom == searching_room_name )
           {
             return(i);
           }
