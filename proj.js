@@ -279,51 +279,7 @@ class Search {
           throw "Search: nodesArray_search must be an array.";
     }
 
-    vaildinput(searchRoom)
-    {
-      for (let i = 0; i < this.nodes.length; i++) {
-
-        let searching_room_name = this.nodes[i].name;
-        let searching_room_number = this.nodes[i].roomNumber; 
-        if (searching_room_name != undefined)
-        {
-          searching_room_name = searching_room_name.toLowerCase();// makes the node names all lower case
-        }
-        //console.log(searching_room); /* printes every name of a node if they have one*/
-          if (searching_room_number != null && searching_room_number == searchRoom)
-          {
-            return true;
-          }
-          if (searchRoom == searching_room_name )
-          {
-            return true;
-          }
-        }
-        return false;
-    }
-
-    returnnodelocation(searchRoom)
-    {
-      for (let i = 0; i < this.nodes.length; i++) {
-
-        let searching_room_name = this.nodes[i].name;
-        let searching_room_number = this.nodes[i].roomNumber;
-        if (searching_room_name != undefined)
-        {
-          searching_room_name = searching_room_name.toLowerCase();// makes the node names all lower case
-        }
-        //console.log(searching_room); /* printes every name of a node if they have one*/
-          if (searching_room_number != null && searching_room_number == searchRoom)
-          {
-            return(i);
-          }
-          if (searchRoom == searching_room_name )
-          {
-            return(i);
-          }
-        }
-        return(-1);
-    }
+    
 }
 
 //-----------------------------------Runtime-------------------------------------
