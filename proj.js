@@ -23,11 +23,11 @@ class Map {
         floorB[5] = new Node(380,480);
         floorB[6] = new Node(349,476);
         floorB[10] = new Node(337,579);
-        floorB[0] = new EndNode(66, 366, "Front Entrance");
-        floorB[7] = new EndNode(365,652,"South Entrance");
-        floorB[8] = new EndNode(449,416,"Stairs");
-        floorB[9] = new EndNode(260,277,"Elevator");
-        floorB[11] = new EndNode(193,579,"Spahr Classroom");
+        floorB[0] = new EndNode(66, 366, null, "Front Entrance");
+        floorB[7] = new EndNode(365,652, null, "South Entrance");
+        floorB[8] = new EndNode(449,416, null, "Stairs");
+        floorB[9] = new EndNode(260,277, null, "Elevator");
+        floorB[11] = new EndNode(193,579, 1006, "Spahr Classroom");
     } // end declareNodesEaton()
 
     setupConnectionsEaton() {
@@ -96,8 +96,11 @@ class Node {
 }
 
 class EndNode extends Node {
-    constructor(x_coord, y_coord, name){
+
+    // If EndNode has no roomNumber or name, set that parameter to null
+    constructor(x_coord, y_coord, roomNumber, name){
         super(x_coord, y_coord);
+        this.roomNumber = roomNumber;
         this.name = name;
     }
 }
@@ -279,13 +282,19 @@ class Search {
     vaildinput(searchRoom)
     {
       for (let i = 0; i < this.nodes.length; i++) {
-        let searching_room = this.nodes[i].name;
-        if (searching_room != undefined)
+
+        let searching_room_name = this.nodes[i].name;
+        let searching_room_number = this.nodes[i].roomNumber;
+        if (searching_room_name != undefined)
         {
-          searching_room = searching_room.toLowerCase();// makes the node names all lower case
+          searching_room_name = searching_room_name.toLowerCase();// makes the node names all lower case
         }
         //console.log(searching_room); /* printes every name of a node if they have one*/
-          if (searchRoom == searching_room )
+          if (searching_room_number != null && searching_room_number == searchRoom)
+          {
+            return true;
+          }
+          if (searchRoom == searching_room_name )
           {
             return true;
           }
@@ -297,13 +306,18 @@ class Search {
     {
       for (let i = 0; i < this.nodes.length; i++) {
 
-        let searching_room = this.nodes[i].name;
-        if (searching_room != undefined)
+        let searching_room_name = this.nodes[i].name;
+        let searching_room_number = this.nodes[i].roomNumber;
+        if (searching_room_name != undefined)
         {
-          searching_room = searching_room.toLowerCase();// makes the node names all lower case
+          searching_room_name = searching_room_name.toLowerCase();// makes the node names all lower case
         }
         //console.log(searching_room); /* printes every name of a node if they have one*/
-          if (searchRoom == searching_room )
+          if (searching_room_number != null && searching_room_number == searchRoom)
+          {
+            return(i);
+          }
+          if (searchRoom == searching_room_name )
           {
             return(i);
           }
@@ -355,14 +369,15 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
     }
     //console.log(floornumber);
 
-    console.log(searchroomid);
+    //console.log(searchroomid);
     if (floorGsearch.vaildinput(searchroomid) == true)//need to work on correct vaildinput
     {
       if (floorGsearch.vaildinput(startloaction) == true)
       {
         let pather = new Pathfinder(map.Eaton.floor[floornumber].nodes, map.Eaton.floor[floornumber].nodes[startnodenumber]);
         let path = pather.getPathTo(map.Eaton.floor[floornumber].nodes[inputnodenumber]);
-        console.log("Shortest path to Spahr is:");
+        console.log("Shortest path to:");
+        console.log(searchroomid);
         while (path.length != 0) {
             let n = path.pop();
             console.log(n.x_coord + ' ' + n.y_coord);
