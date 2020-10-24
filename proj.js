@@ -357,20 +357,40 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
     })
     searchroomid = searchroomid.toLowerCase();// makes the input name lower case
     startloaction = startloaction.toLowerCase();// makes the start loaction name lower case
-    console.log(searchroomid);
-    console.log(startloaction);
+    //console.log(searchroomid);
+    //console.log(startloaction);
 
     let inputnodenumber = floorGsearch.returnnodelocation(searchroomid);
     let startnodenumber = floorGsearch.returnnodelocation(startloaction);
-    console.log(inputnodenumber);
-    console.log(startnodenumber);
+    //console.log(inputnodenumber);
+    //console.log(startnodenumber);
 
-    if (floorGsearch.vaildinput(searchroomid) == true)
+    let floornumber = 0;
+    switch (selectedfloor) {
+      case "Ground Floor":
+        floornumber = 0;
+        break;
+      case "Floor 1":
+        floornumber = 1;
+        break;
+      case "Floor 2":
+        floornumber = 2;
+        break;
+      case "Floor 3":
+        floornumber = 3;
+        break;
+      default:
+        floornumber = 0;
+        break;
+    }
+    //console.log(floornumber);
+
+    if (floorGsearch.vaildinput(searchroomid) == true)//need to work on correct vaildinput
     {
       if (floorGsearch.vaildinput(startloaction) == true)
       {
-        let pather = new Pathfinder(map.Eaton.floor[0].nodes, map.Eaton.floor[0].nodes[startnodenumber]);
-        let path = pather.getPathTo(map.Eaton.floor[0].nodes[inputnodenumber]);
+        let pather = new Pathfinder(map.Eaton.floor[floornumber].nodes, map.Eaton.floor[floornumber].nodes[startnodenumber]);
+        let path = pather.getPathTo(map.Eaton.floor[floornumber].nodes[inputnodenumber]);
         console.log("Shortest path to Spahr is:");
         while (path.length != 0) {
             let n = path.pop();
@@ -379,12 +399,12 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
       }
       else
       {
-
+        alert("not a valid start location")
       }
     }
     else
     {
-
+      alert("not a valid input ")
     }
 
 });
