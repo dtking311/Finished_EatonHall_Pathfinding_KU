@@ -369,14 +369,15 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
     }
     //console.log(floornumber);
 
-    console.log(searchroomid);
+    //console.log(searchroomid);
     if (floorGsearch.vaildinput(searchroomid) == true)//need to work on correct vaildinput
     {
       if (floorGsearch.vaildinput(startloaction) == true)
       {
         let pather = new Pathfinder(map.Eaton.floor[floornumber].nodes, map.Eaton.floor[floornumber].nodes[startnodenumber]);
         let path = pather.getPathTo(map.Eaton.floor[floornumber].nodes[inputnodenumber]);
-        console.log("Shortest path to Spahr is:");
+        console.log("Shortest path to:");
+        console.log(searchroomid);
         while (path.length != 0) {
             let n = path.pop();
             console.log(n.x_coord + ' ' + n.y_coord);
