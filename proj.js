@@ -23,11 +23,11 @@ class Map {
         floorB[5] = new Node(380,480);
         floorB[6] = new Node(349,476);
         floorB[10] = new Node(337,579);
-        floorB[0] = new EndNode(66, 366, "Front Entrance");
-        floorB[7] = new EndNode(365,652,"South Entrance");
-        floorB[8] = new EndNode(449,416,"Stairs");
-        floorB[9] = new EndNode(260,277,"Elevator");
-        floorB[11] = new EndNode(193,579,"Spahr Classroom");
+        floorB[0] = new EndNode(66, 366, null, "Front Entrance");
+        floorB[7] = new EndNode(365,652, null, "South Entrance");
+        floorB[8] = new EndNode(449,416, null, "Stairs");
+        floorB[9] = new EndNode(260,277, null, "Elevator");
+        floorB[11] = new EndNode(193,579, 1006, "Spahr Classroom");
     } // end declareNodesEaton()
 
     setupConnectionsEaton() {
@@ -96,8 +96,11 @@ class Node {
 }
 
 class EndNode extends Node {
-    constructor(x_coord, y_coord, name){
+    
+    // If EndNode has no roomNumber or name, set that parameter to null
+    constructor(x_coord, y_coord, roomNumber, name){
         super(x_coord, y_coord);
+        this.roomNumber = roomNumber;
         this.name = name;
     }
 }
