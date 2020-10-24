@@ -1,9 +1,7 @@
 
 class Map {
-
     // Initialize entire Node map
     constructor() {
-
         // Declaring buildings
         this.Eaton = new Building(4);
 
@@ -16,33 +14,29 @@ class Map {
     } // end constructor
 
     declareNodesEaton() {
-
         // Floor B
         let floorB = this.Eaton.floor[0].nodes;
-        floorB[0] = new EndNode(66, 366, "Front Entrance");
         floorB[1] = new Node(160, 371);
         floorB[2] = new Node(171,484);
         floorB[3] = new Node(231,371);
         floorB[4] = new Node(370,416);
         floorB[5] = new Node(380,480);
         floorB[6] = new Node(349,476);
-        floorB[7] = new EndNode(365,652,"East Entrance");
-        floorB[8] = new EndNode(449,416,"Main Stairs");
-        floorB[9] = new EndNode(260,277,"Dean's Office");
         floorB[10] = new Node(337,579);
+        floorB[0] = new EndNode(66, 366, "Front Entrance");
+        floorB[7] = new EndNode(365,652,"South Entrance");
+        floorB[8] = new EndNode(449,416,"Stairs");
+        floorB[9] = new EndNode(260,277,"Elevator");
         floorB[11] = new EndNode(193,579,"Spahr Classroom");
-
     } // end declareNodesEaton()
 
     setupConnectionsEaton() {
-
         let floorB = this.Eaton.floor[0].nodes;
         let floor1 = this.Eaton.floor[1].nodes;
         let floor2 = this.Eaton.floor[2].nodes;
         let floor3 = this.Eaton.floor[3].nodes;
 
         // Floor B
-
         floorB[0].addVertex(floorB[1]);
         floorB[1].addVertex(floorB[0]);
         floorB[1].addVertex(floorB[2]);
@@ -67,66 +61,48 @@ class Map {
         floorB[10].addVertex(floorB[11]);
         floorB[11].addVertex(floorB[2]);
         floorB[11].addVertex(floorB[10]);
-
     } // end setupConnectionsEaton()
-
 } // end class Map
 
 class Building {
-
     constructor(numFloors) {
-
         // Initialize floors
         this.floor = [];
         for (var i = 0; i < numFloors; i++) {
             this.floor[i] = new Floor;
         }
-
     }
-
 }
 
 class Floor {
-
     constructor() {
-
         // Declare array for Nodes
         this.nodes = [];
-
     }
-
 }
 
-//------------------------------------------------------------------------
-
+//------------------------------------Nodes------------------------------------
 class Node {
-
     constructor(x_coord, y_coord){
         this.vertices = [];
         this.x_coord = x_coord;
         this.y_coord = y_coord;
-
     }
 
     // Adds the given node as a vertex which this Node connects to.
     addVertex(node) {
         this.vertices.push(node);
     }
-
 }
 
 class EndNode extends Node {
-
     constructor(x_coord, y_coord, name){
         super(x_coord, y_coord);
         this.name = name;
-
     }
-
 }
 
-//---------------------------------------------------
-
+//-------------------------------------Pathfinder--------------------------------
 class QElement {
     constructor(element, priority) {
         this.element = element;
@@ -136,7 +112,6 @@ class QElement {
 
 // Min Priority Queue
 class PriorityQueue {
-
     constructor() {
         this.queue = [];
     }
@@ -193,7 +168,6 @@ class PriorityQueue {
 
 
 class Pathfinder {
-
     // nodesArray must be an array of Nodes. startNode can either be a reference to the Node or the Node's index in nodesArray.
     constructor(nodesArray, startNode){
         if (nodesArray instanceof Array)
@@ -289,12 +263,9 @@ class Pathfinder {
         }
         return path;
     }
-
 }
 
-
-//---------------------------------------------------
-
+//-----------------------------------Search--------------------------------------
 class Search {
 
     constructor(nodesArray_search)
@@ -307,9 +278,7 @@ class Search {
 
     vaildinput(searchRoom)
     {
-
       for (let i = 0; i < this.nodes.length; i++) {
-
         let searching_room = this.nodes[i].name;
         if (searching_room != undefined)
         {
@@ -343,6 +312,7 @@ class Search {
     }
 }
 
+//-----------------------------------Runtime-------------------------------------
 let searchroomid = document.getElementById('searchroomid').value;
 let selectedfloor = document.getElementById('floor_level').value;
 let startloaction = document.getElementById('starting_location').value;
@@ -385,6 +355,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
     }
     //console.log(floornumber);
 
+    console.log(searchroomid);
     if (floorGsearch.vaildinput(searchroomid) == true)//need to work on correct vaildinput
     {
       if (floorGsearch.vaildinput(startloaction) == true)
@@ -409,19 +380,16 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
 
 });
 
-//RUNTIME
-
 let map = new Map;
 
 //testing search
 let floorGsearch = new Search(map.Eaton.floor[0].nodes);
-let floor1search = new Search(map.Eaton.floor[1].nodes);
-let floor2search = new Search(map.Eaton.floor[2].nodes);
-let floor3search = new Search(map.Eaton.floor[3].nodes);
+//let floor1search = new Search(map.Eaton.floor[1].nodes);
+//let floor2search = new Search(map.Eaton.floor[2].nodes);
+//let floor3search = new Search(map.Eaton.floor[3].nodes);
 
 
 // Testing pathing
-
 let pather = new Pathfinder(map.Eaton.floor[0].nodes, map.Eaton.floor[0].nodes[9]);
 let path = pather.getPathTo(map.Eaton.floor[0].nodes[11]);
 console.log("Shortest path to Spahr is:");
