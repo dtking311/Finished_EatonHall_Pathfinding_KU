@@ -60,22 +60,33 @@
 
                 <H3>Choose a floor level:</H3>
 
-                    <button class="fbutton">Ground Floor</button>
+
+                  <select id="floor_level">
+                    <option value="Ground Floor">Ground Floor</option>
+                    <option value="Floor 1">Floor 1</option>
+                    <option value="Floor 2">Floor 2</option>
+                    <option value="Floor 3">Floor 3</option>
+                  </select>
+                    <!-- <button class="fbutton">Ground Floor</button>
                     <button class="fbutton fbutton2">Floor 1</button>
                     <button class="fbutton fbutton2">Floor 2</button>
-                    <button class="fbutton fbutton2">Floor 3</button>
+                    <button class="fbutton fbutton2">Floor 3</button> -->
 
 
                 <H3>Choose a starting location:</H3>
 
-                    <button class="fbutton">Main Enterance</button>
-                    <button class="fbutton fbutton2">Elevator</button>
+                    <select id="starting_location">
+                      <option value="Front Entrance">Main Enterance</option>
+                      <option value="East Entrance">East Entrance</option>
+                    </select>
+                    <!-- <button class="fbutton">Main Enterance</button>
+                    <button class="fbutton fbutton2">East Entrance</button>
                     <button class="fbutton fbutton2">Starting_Point_3</button>
-                    <button class="fbutton fbutton2">Starting_Point_4</button>
+                    <button class="fbutton fbutton2">Starting_Point_4</button>-->
 
                     <!--make it look better-->
                 <H3> Enter a room number:</H3>
-                    <input class="text_box"type="text" id="searchroomid" value="448" >
+                    <input class="text_box"type="text" id="searchroomid" placeholder="448" >
                     <i class="custom_icon_1 material-icons">chevron_left</i>
                     <i class="custom_icon_1 material-icons">search</i>
                     <input type="submit" class="fbutton fbutton3" id="searchbutton" value="Search">
