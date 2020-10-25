@@ -514,6 +514,11 @@ class Search {
           throw "Search: nodesArray_search must be an array.";
     }
 
+    /**
+     * Determines if the impute is one of then end nodes.
+     * @param {string} searchRoom - The user input.
+     * @return {bool} true if the input is an endo node and false if it not an end node.
+     */
     vaildinput(searchRoom)
     {
       for (let i = 0; i < this.nodes.length; i++) {
@@ -537,6 +542,11 @@ class Search {
         return false;
     }
 
+    /**
+     * Determines the path between the start node given to the constructor and the specified end node.
+     * @param {string} searchRoom - The user input.
+     * @return {int} retunes the postion of the node in the node array so that the pathfinding can use the node.
+     */
     returnnodelocation(searchRoom)
     {
       for (let i = 0; i < this.nodes.length; i++) {
@@ -562,9 +572,9 @@ class Search {
 }
 
 //-----------------------------------Runtime-------------------------------------
-let searchroomid = document.getElementById('searchroomid').value;
-let selectedfloor = document.getElementById('floor_level').value;
-let startloaction = document.getElementById('starting_location').value;
+let searchroomid = document.getElementById('searchroomid').value;//the text box
+let selectedfloor = document.getElementById('floor_level').value;//the floors butten 
+let startloaction = document.getElementById('starting_location').value;//the the sart location butten 
 let moreThanOnce = 0;
 let targetDiv = document.getElementById('Eaton_g_floor_svg');
 let svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
