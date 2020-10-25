@@ -31,19 +31,49 @@ class Map {
         floorB[2] = new Node(171, 484);
         floorB[3] = new Node(231, 371);
         floorB[4] = new Node(370, 416);
-        floorB[5] = new Node(380, 480);
         floorB[6] = new Node(349, 476);
         floorB[10] = new Node(337, 579);
-
+        floorB[15] = new Node(300, 659);
+        floorB[18] = new Node(260, 285);
+        floorB[19] = new Node(273, 230);
+        floorB[20] = new Node(268, 180);
+        floorB[21] = new Node(321, 175);
+        floorB[22] = new Node(371, 175);
+        floorB[23] = new Node(419, 175);
+        floorB[24] = new Node(434, 120);
+        floorB[25] = new Node(414, 120);
+        floorB[26] = new Node(343, 120);
+        floorB[27] = new Node(323, 120);
+        floorB[28] = new Node(300, 96);
+        floorB[29] = new Node(275, 96);
+        floorB[30] = new Node(257, 96);
+        floorB[32] = new Node(189, 120);
+        floorB[44] = new Node(230, 110);
+        
         //Destination Nodes
         floorB[0] = new EndNode(85, 366, null, "Front Entrance");
+        floorB[5] = new EndNode(380, 480, 10, "3");
         floorB[7] = new EndNode(365, 652, null, "East Entrance");
         floorB[8] = new EndNode(449, 416, null, "Stairs");
         floorB[9] = new EndNode(240, 315, 1, "Deans Office");
         floorB[13] = new EndNode(240, 315, null, "Dean's Office");
         floorB[11] = new EndNode(183, 560, 1006, "Spahr Classroom");
         floorB[12] = new EndNode(183, 560, null, "2");
-        floorB[14] = new EndNode(380, 379, null, "Elevator");        
+        floorB[14] = new EndNode(380, 379, null, "Elevator"); 
+        floorB[16] = new EndNode(265, 705, null, "2A"); 
+        floorB[17] = new EndNode(265, 705, null, "2A1"); 
+        floorB[31] = new EndNode(248, 140, null, "1B");
+        floorB[33] = new EndNode(194, 263, null, "1A"); 
+        floorB[34] = new EndNode(321, 240, null, "1L"); 
+        floorB[35] = new EndNode(372, 240, null, "1K"); 
+        floorB[36] = new EndNode(419, 270, null, "1J"); 
+        floorB[37] = new EndNode(433, 69, null, "1F"); 
+        floorB[38] = new EndNode(414, 69, null, "1E"); 
+        floorB[39] = new EndNode(343, 69, null, "1D"); 
+        floorB[40] = new EndNode(322, 69, null, "1C"); 
+        floorB[41] = new EndNode(275, 109, null, "1B3"); 
+        floorB[42] = new EndNode(256, 69, null, "1B2"); 
+        floorB[43] = new EndNode(189, 82, null, "1B1");                
     } //end declareNodesEaton()
 
     /**
@@ -78,16 +108,101 @@ class Map {
         floorB[7].addVertex(floorB[5]);
         floorB[8].addVertex(floorB[4]);
         floorB[9].addVertex(floorB[3]);
+        floorB[9].addVertex(floorB[18]);
         floorB[10].addVertex(floorB[6]);
         floorB[10].addVertex(floorB[11]);
-        floorB[10].addVertex(floorB[12]);  
+        floorB[10].addVertex(floorB[12]);
+        floorB[10].addVertex(floorB[15]);  
         floorB[11].addVertex(floorB[2]);
         floorB[11].addVertex(floorB[10]);
         floorB[12].addVertex(floorB[2]);
         floorB[12].addVertex(floorB[10]);
         floorB[13].addVertex(floorB[3]);
+        floorB[13].addVertex(floorB[18]);
         floorB[14].addVertex(floorB[3]);
         floorB[14].addVertex(floorB[4]);
+        floorB[15].addVertex(floorB[10]);
+        floorB[15].addVertex(floorB[16]);
+        floorB[15].addVertex(floorB[17]);
+        floorB[16].addVertex(floorB[15]);
+        floorB[17].addVertex(floorB[15]);
+        floorB[18].addVertex(floorB[9]);
+        floorB[18].addVertex(floorB[13]);
+        floorB[18].addVertex(floorB[33]);
+        floorB[18].addVertex(floorB[19]);
+        floorB[19].addVertex(floorB[18]);
+        floorB[19].addVertex(floorB[20]);
+        floorB[19].addVertex(floorB[21]);
+        floorB[20].addVertex(floorB[19]);
+        floorB[20].addVertex(floorB[31]);
+        floorB[21].addVertex(floorB[19]);
+        floorB[21].addVertex(floorB[34]);
+        floorB[21].addVertex(floorB[27]);
+        floorB[21].addVertex(floorB[26]);
+        floorB[21].addVertex(floorB[22]);
+        floorB[21].addVertex(floorB[24]);
+        floorB[22].addVertex(floorB[21]);
+        floorB[22].addVertex(floorB[35]);
+        floorB[22].addVertex(floorB[23]);
+        floorB[22].addVertex(floorB[25]);
+        floorB[22].addVertex(floorB[26]);
+        floorB[22].addVertex(floorB[27]);
+        floorB[23].addVertex(floorB[22]);
+        floorB[23].addVertex(floorB[36]);
+        floorB[23].addVertex(floorB[24]);
+        floorB[23].addVertex(floorB[25]);
+        floorB[23].addVertex(floorB[26]);
+        floorB[24].addVertex(floorB[23]);
+        floorB[24].addVertex(floorB[25]);
+        floorB[24].addVertex(floorB[21]);
+        floorB[24].addVertex(floorB[37]);
+        floorB[25].addVertex(floorB[38]);
+        floorB[25].addVertex(floorB[24]);
+        floorB[25].addVertex(floorB[23]);
+        floorB[25].addVertex(floorB[22]);
+        floorB[25].addVertex(floorB[21]);
+        floorB[25].addVertex(floorB[26]);
+        floorB[26].addVertex(floorB[39]);
+        floorB[26].addVertex(floorB[25]);
+        floorB[26].addVertex(floorB[23]);
+        floorB[26].addVertex(floorB[22]);
+        floorB[26].addVertex(floorB[21]);
+        floorB[26].addVertex(floorB[27]);
+        floorB[26].addVertex(floorB[28]);
+        floorB[27].addVertex(floorB[40]);
+        floorB[27].addVertex(floorB[26]);
+        floorB[27].addVertex(floorB[22]);
+        floorB[27].addVertex(floorB[21]);
+        floorB[27].addVertex(floorB[28]);
+        floorB[28].addVertex(floorB[27]);
+        floorB[28].addVertex(floorB[26]);
+        floorB[28].addVertex(floorB[21]);
+        floorB[28].addVertex(floorB[29]);
+        floorB[29].addVertex(floorB[41]);
+        floorB[29].addVertex(floorB[28]);
+        floorB[29].addVertex(floorB[30]);
+        floorB[30].addVertex(floorB[42]);
+        floorB[30].addVertex(floorB[29]);
+        floorB[30].addVertex(floorB[44]);
+        floorB[31].addVertex(floorB[44]);
+        floorB[31].addVertex(floorB[32]);
+        floorB[31].addVertex(floorB[20]);
+        floorB[32].addVertex(floorB[43]);
+        floorB[32].addVertex(floorB[44]);
+        floorB[33].addVertex(floorB[18]);
+        floorB[34].addVertex(floorB[21]);
+        floorB[35].addVertex(floorB[22]);
+        floorB[36].addVertex(floorB[23]);
+        floorB[37].addVertex(floorB[24]);
+        floorB[38].addVertex(floorB[25]);
+        floorB[39].addVertex(floorB[26]);
+        floorB[40].addVertex(floorB[27]);
+        floorB[41].addVertex(floorB[29]);
+        floorB[42].addVertex(floorB[30]);
+        floorB[43].addVertex(floorB[32]);
+        floorB[44].addVertex(floorB[31]);
+        floorB[44].addVertex(floorB[30]);
+        floorB[44].addVertex(floorB[32]);
     } // end setupConnectionsEaton()
 
 } // end class Map
@@ -502,6 +617,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
       {
         let pather = new Pathfinder(map.Eaton.floor[floornumber].nodes, map.Eaton.floor[floornumber].nodes[startnodenumber]);
         let path = pather.getPathTo(map.Eaton.floor[floornumber].nodes[inputnodenumber]);
+        
         while (path.length != 0) {
             let n = path.pop();
             test_Arr.push(n.x_coord);
@@ -565,3 +681,12 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
 
 let map = new Map;
 let floorGsearch = new Search(map.Eaton.floor[0].nodes);
+
+//REMOOVEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+//testing shit
+let testshit = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+testshit.setAttributeNS(null, 'cx', '66');
+testshit.setAttributeNS(null, 'cy', '366');
+testshit.setAttributeNS(null, 'r', '6');
+testshit.setAttributeNS(null, 'fill', 'blue');
+svgNode.appendChild(testshit);
