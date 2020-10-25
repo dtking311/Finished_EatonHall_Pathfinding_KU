@@ -314,6 +314,7 @@ class Pathfinder {
      * @param {Node} node1
      * @param {Node} node2
      * @return {number} The distance between the two nodes.
+    */
     distanceBetween(node1, node2) {
         return Math.sqrt( Math.pow(node1.x_coord - node2.x_coord, 2) + Math.pow(node1.y_coord - node2.y_coord, 2) );
     }
