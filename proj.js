@@ -647,11 +647,11 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
             j++;
             if (i == 0 || i == (test_Arr.length/2)-1)
             {
-                tempNode.setAttributeNS(null, 'r', '10');
+                tempNode.setAttributeNS(null, 'r', '7');
             }
             else
             {
-                tempNode.setAttributeNS(null, 'r', '6');
+                tempNode.setAttributeNS(null, 'r', '2');
             }
             if (i == 0)
             {
@@ -662,7 +662,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                 tempNode.setAttributeNS(null, 'fill', 'blue');
             }
             tempLine.setAttributeNS(null, 'stroke', 'blue');
-            tempLine.setAttributeNS(null, 'stroke-width', '12');
+            tempLine.setAttributeNS(null, 'stroke-width', '5');
             svgNode.appendChild(tempNode);
             svgNode.appendChild(tempLine);
             last_coords[0] = test_Arr[j-2];
@@ -673,7 +673,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
         let tempNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         tempNode.setAttributeNS(null, 'cx', test_Arr[0]);
         tempNode.setAttributeNS(null, 'cy', test_Arr[1]);
-        tempNode.setAttributeNS(null, 'r', '10');
+        tempNode.setAttributeNS(null, 'r', '7');
         tempNode.setAttributeNS(null, 'fill', 'red');
         svgNode.appendChild(tempNode);
       }
