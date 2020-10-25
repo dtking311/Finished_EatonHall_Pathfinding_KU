@@ -1,6 +1,12 @@
 
+/**
+ * Class representing the entire node map.
+ */
 class Map {
-    // Initialize entire Node map
+    
+    /**
+     * Initializes the entire node map
+     */
     constructor() {
         // Declaring buildings
         this.Eaton = new Building(4);
@@ -13,6 +19,9 @@ class Map {
 
     } // end constructor
 
+    /**
+     * Declares all of the nodes for Eaton.
+     */
     declareNodesEaton() {
         // Floor B
         let floorB = this.Eaton.floor[0].nodes;
@@ -37,6 +46,9 @@ class Map {
         floorB[14] = new EndNode(380, 379, null, "Elevator");        
     } //end declareNodesEaton()
 
+    /**
+     * Creates all connections between the nodes in Eaton.
+     */
     setupConnectionsEaton() {
         let floorB = this.Eaton.floor[0].nodes;
         let floor1 = this.Eaton.floor[1].nodes;
@@ -77,9 +89,18 @@ class Map {
         floorB[14].addVertex(floorB[3]);
         floorB[14].addVertex(floorB[4]);
     } // end setupConnectionsEaton()
+
 } // end class Map
 
+/**
+ * Represents a building in the node map.
+ */
 class Building {
+
+    /**
+     * Creates a building with the specified number of Floors.
+     * @param {number} numFloors - The number of Floors to put in the Building.
+     */
     constructor(numFloors) {
         // Initialize floors
         this.floor = [];
@@ -87,54 +108,105 @@ class Building {
             this.floor[i] = new Floor;
         }
     }
-}
+} // end class Building
 
+/**
+ * Represents a floor of a building in the node map. Contains the nodes of the node map.
+ */
 class Floor {
+
+    /**
+     * Creates a floor and initializes the nodes array.
+     */
     constructor() {
         // Declare array for Nodes
         this.nodes = [];
     }
-}
+} // end class Floor
 
 //------------------------------------Nodes------------------------------------
+
+/**
+ * Represents a vertex in the node map
+ */
 class Node {
+    
+    /**
+     * Creates a Node.
+     * @param {number} x_coord - The x-coordinate to place the Node at.
+     * @param {number} y_coord - The y-coordinate to place the Node at.
+     */
     constructor(x_coord, y_coord){
         this.vertices = [];
         this.x_coord = x_coord;
         this.y_coord = y_coord;
     }
 
-    // Adds the given node as a vertex which this Node connects to.
+    /**
+     * Adds the given node as a vertex which this Node connects to.
+     * @param {Node} node - The Node to add to this Node's vertices.
+     */
     addVertex(node) {
         this.vertices.push(node);
     }
-}
+} // end class Node
 
+/**
+ * Represents a destination or an important location in the node map.
+ * @extends Node
+ */
 class EndNode extends Node {
 
     // If EndNode has no roomNumber or name, set that parameter to null
+    /**
+     * Creates an EndNode.
+     * @param {number} x_coord - The x-coordinate to place the EndNode at.
+     * @param {number} y_coord - The y-coordinate to place the EndNode at.
+     * @param {number} roomNumber - The number of the room the EndNode is associated with. If none, pass null for this param.
+     * @param {string} name - The name of the location the EndNode is associated with. If none, pass null for this param.
+     */
     constructor(x_coord, y_coord, roomNumber, name){
         super(x_coord, y_coord);
         this.roomNumber = roomNumber;
         this.name = name;
     }
-}
+} // end class EndNode
 
 //-------------------------------------Pathfinder--------------------------------
+
+/**
+ * Represents an element in the Priority Queue.
+ */
 class QElement {
+
+    /**
+     * Creates a QElement.
+     * @param element - The thing to store in the queue.
+     * @param {number} priority - The priority of the thing in the queue.
+    */
     constructor(element, priority) {
         this.element = element;
         this.priority = priority;
     }
-}
+} // end class QElement
 
-// Min Priority Queue
+/**
+ * Represents a minimum priority queue.
+ */
 class PriorityQueue {
+
+    /**
+     * Creates a PriorityQueue.
+     */
     constructor() {
         this.queue = [];
     }
 
-    // Add element to queue according to priority
+    /**
+     * Adds given element to queue according to specified priority.
+     * @param element - The thing to store in the queue.
+     * @param {number} priority - The priority of the thing in the queue.
+     */
     enqueue(element, priority) {
         // create queue element from parameters
         let q = new QElement(element, priority);
@@ -150,8 +222,11 @@ class PriorityQueue {
         this.queue.push(q);
     }
 
-    // Removes first element from queue and returns it.
-    // Throws error if queue is empty.
+    /**
+     * Removes first element from queue and returns it.
+     * @throw Throws error if queue is empty.
+     * @return The element of the queue with least priority value.
+     */
     dequeue() {
         if (this.isEmpty())
             throw "PriorityQueue: Nothing to dequeue.";
@@ -159,7 +234,13 @@ class PriorityQueue {
         return this.queue.shift();
     }
 
-    // Assigns the given element the given priority and repositions the element in the queue.
+    /**
+     * Assigns the given element the specified priority and repositions the element in the queue.
+     * @param element - The element int the queue whose priority is to be changed.
+     * @param {number} priority - The new priority of the element.
+     * @throw Throws error if the queue is empty.
+     * @throw Throws error if the element cannot be found in the queue.
+     */
     reprioritizeElement(element, priority) {
         // Find index of the given element in the queue
         let index = null;
@@ -178,15 +259,26 @@ class PriorityQueue {
         //console.log("Set distance of node at " + element.x_coord + ' ' + element.y_coord + " to " + priority);
     }
 
-    // Returns true if the queue has no elements in it, false otherwise.
+    /**
+     * @return True if the queue has no elements in it, false otherwise.
+     */
     isEmpty() {
         return (this.queue.length == 0);
     }
-}
+} // end class PriorityQueue
 
-
+/**
+ * Will find the shortest path between a given start node and any other location in the node map.
+ */
 class Pathfinder {
-    // nodesArray must be an array of Nodes. startNode can either be a reference to the Node or the Node's index in nodesArray.
+
+    /**
+     * Creates a Pathfinder.
+     * @param {Node[]} nodesArray - The array that contains the node map.
+     * @param {Node|number} startNode - A Node or the node's index in nodeArray. This is the place where all paths begin.
+     * @throw error if either of the parameters have the wrong type.
+     * @throw error if startNode is not in the array.
+     */
     constructor(nodesArray, startNode){
         if (nodesArray instanceof Array)
             this.nodes = nodesArray;
@@ -217,11 +309,19 @@ class Pathfinder {
         this.dijkstra();
     }
 
-    // Calculates the distance between two nodes
+    /**
+     * Calculates the distance between two nodes.
+     * @param {Node} node1
+     * @param {Node} node2
+     * @return {number} The distance between the two nodes.
     distanceBetween(node1, node2) {
         return Math.sqrt( Math.pow(node1.x_coord - node2.x_coord, 2) + Math.pow(node1.y_coord - node2.y_coord, 2) );
     }
 
+    /**
+     * Dijkstra's shortest path algorithm.
+     * @throw error if a vertex is missing.
+     */
     dijkstra() {
         //console.log("Started pathing for start node at index " + this.start);
 
@@ -241,8 +341,6 @@ class Pathfinder {
             // get min Node from queue
             let u = this.priorityQueue.dequeue().element;
             let uIndex = this.nodes.indexOf(u);
-            if (uIndex == -1)
-                throw "Pathfinder: element from priority queue is not in the array of nodes.";
 
             //console.log("Current node is at " + u.x_coord + ' ' + u.y_coord);
 
@@ -269,6 +367,12 @@ class Pathfinder {
         }
     }
 
+    /**
+     * Determines the path between the start node given to the constructor and the specified end node.
+     * @param {Node} endNode - The destination.
+     * @throw error if the parameter is not of the correct type.
+     * @return {Node[]} The path from start to destination. Progressively calling pop() on the array will give the nodes in the proper order.
+     */
     getPathTo(endNode) {
         if (endNode instanceof Node == false)
             throw "Pathfinder: endNode must be a Node.";

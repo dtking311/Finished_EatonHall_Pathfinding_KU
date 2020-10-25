@@ -1,0 +1,19 @@
+{
+  "name": "eecs448project3",
+  "version": "1.0.0",
+  "description": "Interactive map for KU Engineering",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dtking311/EECS448Project3.git"
+  },
+  "author": "Darrin T., Joshua B., Tyler R., Trey W.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dtking311/EECS448Project3/issues"
+  },
+  "homepage": "https://github.com/dtking311/EECS448Project3#readme"
+}
