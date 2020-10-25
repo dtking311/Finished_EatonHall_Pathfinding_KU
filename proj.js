@@ -16,19 +16,26 @@ class Map {
     declareNodesEaton() {
         // Floor B
         let floorB = this.Eaton.floor[0].nodes;
+        
+        //Nodes to travel through
         floorB[1] = new Node(160, 371);
-        floorB[2] = new Node(171,484);
-        floorB[3] = new Node(231,371);
-        floorB[4] = new Node(370,416);
-        floorB[5] = new Node(380,480);
-        floorB[6] = new Node(349,476);
-        floorB[10] = new Node(337,579);
-        floorB[0] = new EndNode(66, 366, null, "Front Entrance");
-        floorB[7] = new EndNode(365,652, null, "South Entrance");
-        floorB[8] = new EndNode(449,416, null, "Stairs");
-        floorB[9] = new EndNode(260,277, null, "Elevator");
-        floorB[11] = new EndNode(193,579, 1006, "Spahr Classroom");
-    } // end declareNodesEaton()
+        floorB[2] = new Node(171, 484);
+        floorB[3] = new Node(231, 371);
+        floorB[4] = new Node(370, 416);
+        floorB[5] = new Node(380, 480);
+        floorB[6] = new Node(349, 476);
+        floorB[10] = new Node(337, 579);
+
+        //Destination Nodes
+        floorB[0] = new EndNode(85, 366, null, "Front Entrance");
+        floorB[7] = new EndNode(365, 652, null, "East Entrance");
+        floorB[8] = new EndNode(449, 416, null, "Stairs");
+        floorB[9] = new EndNode(240, 315, 1, "Deans Office");
+        floorB[13] = new EndNode(240, 315, null, "Dean's Office");
+        floorB[11] = new EndNode(183, 560, 1006, "Spahr Classroom");
+        floorB[12] = new EndNode(183, 560, null, "2");
+        floorB[14] = new EndNode(380, 379, null, "Elevator");        
+    } //end declareNodesEaton()
 
     setupConnectionsEaton() {
         let floorB = this.Eaton.floor[0].nodes;
@@ -43,9 +50,11 @@ class Map {
         floorB[1].addVertex(floorB[3]);
         floorB[2].addVertex(floorB[1]);
         floorB[2].addVertex(floorB[11]);
+        floorB[2].addVertex(floorB[12]); 
         floorB[3].addVertex(floorB[1]);
         floorB[3].addVertex(floorB[4]);
         floorB[3].addVertex(floorB[9]);
+        floorB[3].addVertex(floorB[13]);     
         floorB[4].addVertex(floorB[3]);
         floorB[4].addVertex(floorB[5]);
         floorB[4].addVertex(floorB[8]);
@@ -59,8 +68,14 @@ class Map {
         floorB[9].addVertex(floorB[3]);
         floorB[10].addVertex(floorB[6]);
         floorB[10].addVertex(floorB[11]);
+        floorB[10].addVertex(floorB[12]);  
         floorB[11].addVertex(floorB[2]);
         floorB[11].addVertex(floorB[10]);
+        floorB[12].addVertex(floorB[2]);
+        floorB[12].addVertex(floorB[10]);
+        floorB[13].addVertex(floorB[3]);
+        floorB[14].addVertex(floorB[3]);
+        floorB[14].addVertex(floorB[4]);
     } // end setupConnectionsEaton()
 } // end class Map
 
@@ -160,7 +175,7 @@ class PriorityQueue {
 
         this.queue.splice(index, 1); // Removing the old element
         this.enqueue(element, priority); // Adding the element again with new priority
-        console.log("Set distance of node at " + element.x_coord + ' ' + element.y_coord + " to " + priority);
+        //console.log("Set distance of node at " + element.x_coord + ' ' + element.y_coord + " to " + priority);
     }
 
     // Returns true if the queue has no elements in it, false otherwise.
@@ -208,7 +223,7 @@ class Pathfinder {
     }
 
     dijkstra() {
-        console.log("Started pathing for start node at index " + this.start);
+        //console.log("Started pathing for start node at index " + this.start);
 
         // Set distance of start to 0
         this.distances[this.start] = 0;
@@ -229,7 +244,7 @@ class Pathfinder {
             if (uIndex == -1)
                 throw "Pathfinder: element from priority queue is not in the array of nodes.";
 
-            console.log("Current node is at " + u.x_coord + ' ' + u.y_coord);
+            //console.log("Current node is at " + u.x_coord + ' ' + u.y_coord);
 
             for (var i = 0; i < u.vertices.length; i++) {
                 let v = u.vertices[i];
@@ -239,7 +254,7 @@ class Pathfinder {
 
                 // Make sure the vertex has not been visited yet
                 if (!this.visited.includes(v)) {
-                    console.log("Examining vertex at " + v.x_coord + ' ' + v.y_coord);
+                    //console.log("Examining vertex at " + v.x_coord + ' ' + v.y_coord);
                     // Calculate distance b/w Nodes u and v
                     let dist = this.distances[uIndex] + this.distanceBetween(u, v);
 
@@ -330,24 +345,31 @@ class Search {
 let searchroomid = document.getElementById('searchroomid').value;
 let selectedfloor = document.getElementById('floor_level').value;
 let startloaction = document.getElementById('starting_location').value;
+let moreThanOnce = 0;
+let targetDiv = document.getElementById('Eaton_g_floor_svg');
+let svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+svgNode.setAttributeNS(null, "id", "createdPath");
 
 document.querySelector("#searchbutton").addEventListener('click',  function () {
+  if (moreThanOnce > 0)
+  {
+    let createdPath = document.getElementById('createdPath');
+    targetDiv.removeChild(createdPath);
+    svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgNode.setAttributeNS(null, "id", "createdPath");
+  }
+  targetDiv.appendChild(svgNode);
   searchroomid = document.getElementById('searchroomid').value;
   selectedfloor = document.getElementById('floor_level').value;
   startloaction = document.getElementById('starting_location').value;
   document.querySelector("#searchroomid").addEventListener('keyup', (roomid) => {
       searchroomid = roomid.target.value.toLowerCase();
-      //console.log(searchroomid); /*to see each character that is entered*/
     })
     searchroomid = searchroomid.toLowerCase();// makes the input name lower case
     startloaction = startloaction.toLowerCase();// makes the start loaction name lower case
-    //console.log(searchroomid);
-    //console.log(startloaction);
 
     let inputnodenumber = floorGsearch.returnnodelocation(searchroomid);
     let startnodenumber = floorGsearch.returnnodelocation(startloaction);
-    //console.log(inputnodenumber);
-    //console.log(startnodenumber);
 
     let floornumber = 0;
     switch (selectedfloor) {
@@ -367,21 +389,62 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
         floornumber = 0;
         break;
     }
-    //console.log(floornumber);
 
-    //console.log(searchroomid);
-    if (floorGsearch.vaildinput(searchroomid) == true)//need to work on correct vaildinput
+    let test_Arr = [];
+    if (floorGsearch.vaildinput(searchroomid) == true)
     {
       if (floorGsearch.vaildinput(startloaction) == true)
       {
         let pather = new Pathfinder(map.Eaton.floor[floornumber].nodes, map.Eaton.floor[floornumber].nodes[startnodenumber]);
         let path = pather.getPathTo(map.Eaton.floor[floornumber].nodes[inputnodenumber]);
-        console.log("Shortest path to:");
-        console.log(searchroomid);
         while (path.length != 0) {
             let n = path.pop();
-            console.log(n.x_coord + ' ' + n.y_coord);
+            test_Arr.push(n.x_coord);
+            test_Arr.push(n.y_coord);
         }
+
+        let j = 0;
+        let last_coords = [test_Arr[0], test_Arr[1]];
+        for (let i = 0; i < test_Arr.length/2; ++i)
+        {
+            let tempNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            let tempLine = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            tempNode.setAttributeNS(null, 'cx', test_Arr[j]);
+            tempLine.setAttributeNS(null, 'd', 'M' + last_coords[0] + ' ' + last_coords[1] + ' L' + test_Arr[j] + ' ' + test_Arr[j+1] + ' Z');
+            j++;
+            tempNode.setAttributeNS(null, 'cy', test_Arr[j]);
+            j++;
+            if (i == 0 || i == (test_Arr.length/2)-1)
+            {
+                tempNode.setAttributeNS(null, 'r', '10');
+            }
+            else
+            {
+                tempNode.setAttributeNS(null, 'r', '6');
+            }
+            if (i == 0)
+            {
+                tempNode.setAttributeNS(null, 'fill', 'red');
+            }
+            else
+            {
+                tempNode.setAttributeNS(null, 'fill', 'blue');
+            }
+            tempLine.setAttributeNS(null, 'stroke', 'blue');
+            tempLine.setAttributeNS(null, 'stroke-width', '12');
+            svgNode.appendChild(tempNode);
+            svgNode.appendChild(tempLine);
+            last_coords[0] = test_Arr[j-2];
+            last_coords[1] = test_Arr[j-1];
+        }
+
+        //replaces the starting node so that the red is on top of the blue
+        let tempNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        tempNode.setAttributeNS(null, 'cx', test_Arr[0]);
+        tempNode.setAttributeNS(null, 'cy', test_Arr[1]);
+        tempNode.setAttributeNS(null, 'r', '10');
+        tempNode.setAttributeNS(null, 'fill', 'red');
+        svgNode.appendChild(tempNode);
       }
       else
       {
@@ -392,23 +455,8 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
     {
       alert("not a valid input ")
     }
-
+   moreThanOnce++;
 });
 
 let map = new Map;
-
-//testing search
 let floorGsearch = new Search(map.Eaton.floor[0].nodes);
-//let floor1search = new Search(map.Eaton.floor[1].nodes);
-//let floor2search = new Search(map.Eaton.floor[2].nodes);
-//let floor3search = new Search(map.Eaton.floor[3].nodes);
-
-
-// Testing pathing
-let pather = new Pathfinder(map.Eaton.floor[0].nodes, map.Eaton.floor[0].nodes[9]);
-let path = pather.getPathTo(map.Eaton.floor[0].nodes[11]);
-console.log("Shortest path to Spahr is:");
-while (path.length != 0) {
-    let n = path.pop();
-    console.log(n.x_coord + ' ' + n.y_coord);
-}
