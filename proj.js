@@ -681,12 +681,3 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
 
 let map = new Map;
 let floorGsearch = new Search(map.Eaton.floor[0].nodes);
-
-//REMOOVEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-//testing shit
-let testshit = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-testshit.setAttributeNS(null, 'cx', '66');
-testshit.setAttributeNS(null, 'cy', '366');
-testshit.setAttributeNS(null, 'r', '6');
-testshit.setAttributeNS(null, 'fill', 'blue');
-svgNode.appendChild(testshit);
