@@ -545,7 +545,7 @@ class Search {
     /**
      * Determines the path between the start node given to the constructor and the specified end node.
      * @param {string} searchRoom - The user input.
-     * @return {int} retunes the postion of the node in the node array so that the pathfinding can use the node.
+     * @return {number} retunes the postion of the node in the node array so that the pathfinding can use the node.
      */
     returnnodelocation(searchRoom)
     {
