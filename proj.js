@@ -17,13 +17,17 @@ class Map {
         // Make all connections between nodes for each building.
         this.setupConnectionsEaton();
 
+        // Concatenate all of the node arrays into a single node map. This allows pathfinder to get between floors.
+        // If this ends up working out, will need to add the other floors to the concat.
+        this.nodeMap = this.Eaton.floor[0].nodes.concat(this.Eaton.floor[1].nodes);
+
     } // end constructor
 
     /**
      * Declares all of the nodes for Eaton.
      */
     declareNodesEaton() {
-        // Floor B
+        // ------------Floor B---------------
         let floorB = this.Eaton.floor[0].nodes;
         
         //Nodes to travel through
@@ -49,6 +53,7 @@ class Map {
         floorB[30] = new Node(257, 96);
         floorB[32] = new Node(189, 120);
         floorB[44] = new Node(230, 110);
+        floorB[45] = new Node(120, 366);
         
         //Destination Nodes
         floorB[0] = new EndNode(85, 366, null, "Front Entrance");
@@ -73,7 +78,23 @@ class Map {
         floorB[40] = new EndNode(322, 69, null, "1C"); 
         floorB[41] = new EndNode(275, 109, null, "1B3"); 
         floorB[42] = new EndNode(256, 69, null, "1B2"); 
-        floorB[43] = new EndNode(189, 82, null, "1B1");                
+        floorB[43] = new EndNode(189, 82, null, "1B1");
+        floorB[46] = new EndNode(120, 251, null, "BS01");
+
+        // ----------Floor 1------------
+        let floor1 = this.Eaton.floor[1].nodes;
+
+        // some test nodes for pathing between floors
+        floor1[0] = new EndNode(449, 416, null, "Stairs");
+        floor1[1] = new Node(608, 461);
+        floor1[2] = new Node(600, 386);
+        floor1[3] = new Node(190, 386);
+        floor1[4] = new EndNode(190, 338, 1001, "Engineering Career Center");
+        floor1[5] = new Node(139, 261);
+        floor1[6] = new Node(115, 261);
+        floor1[7] = new Node(115, 339);
+        floor1[8] = new EndNode(140, 339, null, "1S01");
+        floor1[9] = new Node(140, 386);
     } //end declareNodesEaton()
 
     /**
@@ -86,8 +107,8 @@ class Map {
         let floor3 = this.Eaton.floor[3].nodes;
 
         // Floor B
-        floorB[0].vertices = [ floorB[1] ];
-        floorB[1].vertices = [ floorB[0], floorB[2], floorB[3] ];
+        floorB[0].vertices = [ floorB[45] ];
+        floorB[1].vertices = [ floorB[45], floorB[2], floorB[3] ];
         floorB[2].vertices = [ floorB[1], floorB[11], floorB[12] ];
         floorB[3].vertices = [ floorB[1], floorB[4], floorB[9], floorB[13] ];
         floorB[4].vertices = [ floorB[3], floorB[5], floorB[8] ];   
@@ -131,6 +152,22 @@ class Map {
         floorB[42].vertices = [ floorB[30] ];
         floorB[43].vertices = [ floorB[32] ];
         floorB[44].vertices = [ floorB[31], floorB[30], floorB[32] ];
+        floorB[45].vertices = [ floorB[0], floorB[1], floorB[46] ];
+        floorB[46].vertices = [ floorB[45], floor1[5] ];
+
+        floorB[8].vertices.push(floor1[0]);
+
+        // Floor 1
+        floor1[0].vertices = [ floorB[8], floor1[1] ];
+        floor1[1].vertices = [ floor1[0], floor1[2] ];
+        floor1[2].vertices = [ floor1[1], floor1[3] ];
+        floor1[3].vertices = [ floor1[2], floor1[4], floor1[9] ];
+        floor1[4].vertices = [ floor1[3] ];
+        floor1[5].vertices = [ floorB[46], floor1[6] ];
+        floor1[6].vertices = [ floor1[5], floor1[7] ];
+        floor1[7].vertices = [ floor1[6], floor1[8] ];
+        floor1[8].vertices = [ floor1[7], floor1[9] ];
+        floor1[9].vertices = [ floor1[8], floor1[3] ];
 
     } // end setupConnectionsEaton()
 
@@ -286,7 +323,8 @@ class PriorityQueue {
      * @throw Throws error if the element cannot be found in the queue.
      */
     reprioritizeElement(element, priority) {
-        // Find index of the given element in the queue
+        // Find index of the given element in the queue.
+        // Note that the indexOf() Array method cannot be used because the queue[] stores QElements and not elements.
         let index = null;
         for (var i = 0; i < this.queue.length; i++) {
             if (this.queue[i].element === element) {
@@ -300,7 +338,7 @@ class PriorityQueue {
 
         this.queue.splice(index, 1); // Removing the old element
         this.enqueue(element, priority); // Adding the element again with new priority
-        //console.log("Set distance of node at " + element.x_coord + ' ' + element.y_coord + " to " + priority);
+        console.log("Set distance of node at " + element.x_coord + ' ' + element.y_coord + " to " + priority);
     }
 
     /**
@@ -387,7 +425,7 @@ class Pathfinder {
             let u = this.priorityQueue.dequeue().element;
             let uIndex = this.nodes.indexOf(u);
 
-            //console.log("Current node is at " + u.x_coord + ' ' + u.y_coord);
+            console.log("Current node is at " + u.x_coord + ' ' + u.y_coord);
 
             for (var i = 0; i < u.vertices.length; i++) {
                 let v = u.vertices[i];
@@ -397,7 +435,7 @@ class Pathfinder {
 
                 // Make sure the vertex has not been visited yet
                 if (!this.visited.includes(v)) {
-                    //console.log("Examining vertex at " + v.x_coord + ' ' + v.y_coord);
+                    console.log("Examining vertex at " + v.x_coord + ' ' + v.y_coord);
                     // Calculate distance b/w Nodes u and v
                     let dist = this.distances[uIndex] + this.distanceBetween(u, v);
 
@@ -444,9 +482,9 @@ class Search {
     }
 
     /**
-     * Determines if the impute is one of then end nodes.
+     * Determines if the input is one of the end nodes.
      * @param {string} searchRoom - The user input.
-     * @return {bool} true if the input is an endo node and false if it not an end node.
+     * @return {bool} true if the input is an end node and false if it is not an end node.
      */
     vaildinput(searchRoom)
     {
@@ -458,7 +496,7 @@ class Search {
         {
           searching_room_name = searching_room_name.toLowerCase();// makes the node names all lower case
         }
-        //console.log(searching_room); /* printes every name of a node if they have one*/
+        //console.log(searching_room); /* prints every name of a node if they have one*/
           if (searching_room_number != null && searching_room_number == searchRoom)
           {
             return true;
@@ -474,7 +512,7 @@ class Search {
     /**
      * Determines the path between the start node given to the constructor and the specified end node.
      * @param {string} searchRoom - The user input.
-     * @return {number} retunes the postion of the node in the node array so that the pathfinding can use the node.
+     * @return {number} retuns the position of the node in the node array so that the pathfinding can use the node.
      */
     returnnodelocation(searchRoom)
     {
@@ -486,7 +524,7 @@ class Search {
         {
           searching_room_name = searching_room_name.toLowerCase();// makes the node names all lower case
         }
-        //console.log(searching_room); /* printes every name of a node if they have one*/
+        //console.log(searching_room); /* prints every name of a node if they have one*/
           if (searching_room_number != null && searching_room_number == searchRoom)
           {
             return(i);
@@ -502,8 +540,8 @@ class Search {
 
 //-----------------------------------Runtime-------------------------------------
 let searchroomid = document.getElementById('searchroomid').value;//the text box
-let selectedfloor = document.getElementById('floor_level').value;//the floors butten 
-let startloaction = document.getElementById('starting_location').value;//the the sart location butten 
+let selectedfloor = document.getElementById('floor_level').value;//the floors button 
+let startloaction = document.getElementById('starting_location').value;//the the start location button 
 let moreThanOnce = 0;
 let targetDiv = document.getElementById('Eaton_g_floor_svg');
 let svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -554,7 +592,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
     {
       if (floorGsearch.vaildinput(startloaction) == true)
       {
-        let pather = new Pathfinder(map.Eaton.floor[floornumber].nodes, map.Eaton.floor[floornumber].nodes[startnodenumber]);
+        let pather = new Pathfinder(map.nodeMap, map.Eaton.floor[floornumber].nodes[startnodenumber]);
         let path = pather.getPathTo(map.Eaton.floor[floornumber].nodes[inputnodenumber]);
         
         while (path.length != 0) {
@@ -620,3 +658,11 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
 
 let map = new Map;
 let floorGsearch = new Search(map.Eaton.floor[0].nodes);
+
+let pathfinder = new Pathfinder(map.nodeMap, map.Eaton.floor[0].nodes[0]);
+let p = pathfinder.getPathTo(map.Eaton.floor[1].nodes[4]);
+console.log("Path from front entrance to Career center");
+while (p.length > 0) {
+    let node = p.pop();
+    console.log(node.x_coord + ' ' + node.y_coord);
+}
