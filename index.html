@@ -69,9 +69,14 @@
     </div>
 
     <div class="map">
+        <button class="tabs" onclick="openFloor(event, 'Ground')" id="pageDefault">Ground Floor</button>
+        <button class="tabs" onclick="openFloor(event, 'Floor1')">Floor 1</button>
+        <button class="tabs" onclick="openFloor(event, 'Floor2')">Floor 2</button>
+        <button class="tabs" onclick="openFloor(event, 'Floor3')">Floor 3</button>
         <!--
                     **** This is where we put the map and everything related to it! ****
         -->
+            <div id="Ground" class="floorCont">
             <div class="glue">
                 <div class="logicmap" id="HTMLmap"></div>
                 <div id="map_img">
@@ -852,13 +857,31 @@
                 </div>
                 <!--<img id="map_img" src="Eaton_B - Final.svg"></img>-->
             </div>
+            </div>
+
+            <div id="Floor1" class="floorCont">
+                <p>Floor 1 -- temp -- not sure about the block of generated stuff in html</p>
+
+                <img src="Eaton_1 - Final.svg">
+            </div>
+
+            <div id="Floor2" class="floorCont">
+                <p>Floor 2 -- temp -- not sure about the block of generated stuff in html</p>
+
+                <img src="Eaton_2 - Final.svg">
+            </div>
+                
+            <div id="Floor3" class="floorCont">
+                <p>Floor 3 -- temp -- not sure about the block of generated stuff in html</p>
+
+                <img src="Eaton_3 - Final.svg">
+            </div>
     </div>
 
     <div class="credits">
         <div class = "top_credits"></div>
         <div class = "mid_credits"></div>
-        <div class = "bot_credits">
-            <div class="People">
+        <div class = "bot_credits">            <div class="People">
                 <div class="Darrin">
                     <a href="https://github.com/dtking311" style="text-decoration: none;">
                     <i class="custom_icon_2 material-icons" style="font-size: 6em; color: rgb(207, 207, 207);">sentiment_very_satisfied</i>
@@ -911,7 +934,6 @@
         </div>
         <div class = "botgray_credits"></div>
     </div>
-    
     <script src="proj.js"></script>
 </body>
 </html>

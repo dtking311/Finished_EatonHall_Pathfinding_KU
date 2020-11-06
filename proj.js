@@ -900,6 +900,26 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
    moreThanOnce++;
 });
 
+function openFloor(event, floorName) {
+
+    let i, tabObj, tabPath;
+    
+    tabObj = document.getElementsByClassName("floorCont");
+  for (i = 0; i < tabObj.length; i++) {
+    tabObj[i].style.display = "none";
+  }
+
+  tabPath = document.getElementsByClassName("tabs");
+  for (i = 0; i < tabPath.length; i++) {
+    tabPath[i].className = tabPath[i].className.replace(" active", "");
+  }
+
+  document.getElementById(floorName).style.display = "block";
+  evt.currentTarget.className += " active";
+
+}
+
+
 let map = new Map;
 let floorGsearch = new Search(map.Eaton.floor[0].nodes);
 
@@ -910,3 +930,6 @@ while (p.length > 0) {
     let node = p.pop();
     console.log(node.x_coord + ' ' + node.y_coord);
 }
+
+document.getElementById("pageDefault").click();
+document.getElementById("pageDefault").focus();
