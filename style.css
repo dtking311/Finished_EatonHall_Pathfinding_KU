@@ -289,7 +289,7 @@ svg{
 }
 
 .Darrin:Hover{
-    color: red;
+    color: #E8000D;
     font-size: 1.8rem;
 }
 
@@ -301,7 +301,7 @@ svg{
 }
 
 .Joshua:Hover{
-    color: red;
+    color: #E8000D;
     font-size: 1.8rem;
 }
 
@@ -313,7 +313,7 @@ svg{
 }
 
 .Trey:Hover{
-    color: red;
+    color: #E8000D;
     font-size: 1.8rem;
 }
 
@@ -325,7 +325,7 @@ svg{
 }
 
 .Tyler:Hover{
-    color: red;
+    color: #E8000D;
     font-size: 1.8rem;
 }
 
@@ -366,3 +366,51 @@ td {
     font-size: 0.1px;
     overflow: hidden;
 }
+
+.tabs {
+ overflow: hidden;
+ border: none;
+ border-radius: 30px;
+ 
+ display: inline-block;
+ 
+ background-color: #0051BA;
+ color: white;
+ 
+ padding-left: 20px;
+ padding-top: 20px;
+ padding-right: 20px;
+ padding-bottom: 20px;
+ transition: 0.5s;
+ font: 22px "Raleway",sans-serif;
+
+ 
+ margin-top: 10px;
+ margin-bottom: 10px;
+ margin-left: 2.4%;
+ margin-right: 2.4%;
+ width: 20%;
+
+
+}
+
+
+.tabs:hover {
+
+    background-color: #ffc82d;
+    cursor: pointer;
+    padding: 40px 40px 40px 40px;
+
+}
+
+
+
+.tabs:focus {
+
+    background-color: #E8000D;
+    outline: none;
+
+}
+
+
+
