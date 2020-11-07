@@ -784,8 +784,12 @@ class Search {
 
 //-----------------------------------Runtime-------------------------------------
 let searchroomid = document.getElementById('searchroomid').value;//the text box
-let selectedfloor = document.getElementById('floor_level').value;//the floors button 
 
+
+
+//let selectedfloor = document.getElementById('floor_level').value;//the floors button 
+
+    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     //Selected Floor no longer exists (for the sake of diag, it is commented out in index.html @line 58)
     //Needs updating for path to generate
 
