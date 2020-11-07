@@ -785,6 +785,11 @@ class Search {
 //-----------------------------------Runtime-------------------------------------
 let searchroomid = document.getElementById('searchroomid').value;//the text box
 let selectedfloor = document.getElementById('floor_level').value;//the floors button 
+
+    //Selected Floor no longer exists (for the sake of diag, it is commented out in index.html @line 58)
+    //Needs updating for path to generate
+
+
 let startloaction = document.getElementById('starting_location').value;//the the start location button 
 let moreThanOnce = 0;
 let targetDiv = document.getElementById('Eaton_g_floor_svg');
@@ -915,7 +920,7 @@ function openFloor(event, floorName) {
   }
 
   document.getElementById(floorName).style.display = "block";
-  evt.currentTarget.className += " active";
+  event.currentTarget.className += " active";
 
 }
 
@@ -933,3 +938,4 @@ while (p.length > 0) {
 
 document.getElementById("pageDefault").click();
 document.getElementById("pageDefault").focus();
+

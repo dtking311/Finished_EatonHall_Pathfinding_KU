@@ -45,20 +45,21 @@
         <div class="column main">
             <div class="text_container">
                 <H1>Find classroom</H1>
-                <H3>Choose a floor level:</H3>
-                    <select id="floor_level">
-                        <option value="Ground Floor">Ground Floor</option>
-                        <!-- <option value="Floor 1">Floor 1</option> -->
-                        <!-- <option value="Floor 2">Floor 2</option> -->
-                        <!-- <option value="Floor 3">Floor 3</option> -->
-                    </select>
+                
                 <H3>Choose a starting location:</H3>
-                    <select id="starting_location">
-                        <option value="Front Entrance">Front Entrance</option>
-                        <option value="Elevator">Elevator</option>
-                        <option value="Stairs">Stairs</option>
-                        <option value="East Entrance">East Entrance</option>
+                    <select id="starting_location" class="SelectorBox">
+                        <option class="option_sel_1" value="Front Entrance">Front Entrance - Ground Floor</option>
+                        <option class="option_sel_1" value="East Entrance">East Entrance - Ground Floor</option>
+                        <option class="option_sel_3" value="North Entrance">North Entrance - Floor 1</option>
+                        <option class="option_sel_2" value="Skywalk Entrance">North Skywalk Entrance - Floor 2</option>
                     </select>
+                       <!-- 
+
+                            <H3>Choose a floor level:</H3>
+                            <select id="floor_level">
+                            <option value="Ground Floor">Ground Floor</option>
+                            </select>
+                        -->
                 <H3> Enter a room number:</H3>
                     <input class="text_box" type="text" id="searchroomid" placeholder="Room #">
                     <i class="custom_icon_1 material-icons">chevron_left</i>

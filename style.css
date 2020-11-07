@@ -155,9 +155,9 @@ body {
     display: inline-block;
     cursor: pointer;
     font-size: 20px;
-    padding: 15px 32px;
+    padding: 25px 32px;
     margin-top: -20px;
-    border-radius: 8px;
+    border-radius: 36px;
     transition-duration: 0.5s;
 }
 
@@ -183,22 +183,30 @@ body {
 
 .fbutton3 {
     background-color: #E8000D;
+    border: none;
     /*margin-left: 450px;*/
     /*margin-top: 30px;*/
+}
+
+.fbutton:focus {
+
+    border: none;
+    outline: 0;
+
 }
 
 .text_box {
     background-color: rgb(226, 226, 226);
     color: gray;
-    font-size: 20px;
+    font-size: 26px;
     font-style: italic;
     border-color: transparent;
     border-radius: 32px;
-    padding: 15px 32px;
-    margin-left: 20px;
+    padding: 25px 32px;
+    margin-top: 20px;
     outline: none;
     transition-duration: 0.3s;
-    width: 10%;
+    width: 15%;
 }
 
 .text_box:focus {
@@ -252,9 +260,7 @@ svg{
     opacity: 85%;
 }
 
-#Eaton_g_floor_svg{
 
-}
 
 .team_members {
     width: 60%;
@@ -409,6 +415,57 @@ td {
 
     background-color: #E8000D;
     outline: none;
+
+}
+
+.SelectorBox {
+
+    padding: 15px 60px 15px 10px;
+    font: 30px "Raleway",sans-serif;
+    background-color: rgb(228, 228, 228);
+    border: none;
+    transition: 0.5s;
+    border-radius: 10px;
+    cursor: pointer;
+
+}
+
+
+.option_sel_1 {
+
+    
+    font: 30px "Raleway",sans-serif;
+    background-color: rgb(213, 213, 255);
+    color: #E8000D;
+    border: none;
+    cursor: pointer;
+
+
+}
+
+
+
+.option_sel_2 {
+
+    
+    font: 30px "Raleway",sans-serif;
+    background-color: rgb(213, 213, 255);
+    color: #0051BA;
+    border: none;
+    cursor: pointer;
+
+
+}
+
+.option_sel_3 {
+
+    
+    font: 30px "Raleway",sans-serif;
+    background-color: rgb(213, 213, 255);
+    color:  #ddad27;
+    border: none;
+    cursor: pointer;
+
 
 }
 
