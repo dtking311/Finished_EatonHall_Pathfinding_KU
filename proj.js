@@ -3,7 +3,7 @@
  * Class representing the entire node map.
  */
 class Map {
-    
+
     /**
      * Initializes the entire node map
      */
@@ -29,7 +29,7 @@ class Map {
     declareNodesEaton() {
         // ------------Floor B---------------
         let floorB = this.Eaton.floor[0].nodes;
-        
+
         //Nodes to travel through
         floorB[1] = new Node(160, 371);
         floorB[2] = new Node(171, 484);
@@ -54,7 +54,7 @@ class Map {
         floorB[32] = new Node(189, 120);
         floorB[44] = new Node(230, 110);
         floorB[45] = new Node(120, 366);
-        
+
         //Destination Nodes
         floorB[0] = new EndNode(85, 366, null, "Front Entrance");
         floorB[5] = new EndNode(380, 480, 10, "3");
@@ -64,20 +64,20 @@ class Map {
         floorB[13] = new EndNode(240, 315, null, "Dean's Office");
         floorB[11] = new EndNode(183, 560, 1006, "Spahr Classroom");
         floorB[12] = new EndNode(183, 560, null, "2");
-        floorB[14] = new EndNode(380, 379, null, "BE01 Elevator"); 
-        floorB[16] = new EndNode(265, 705, null, "2A"); 
-        floorB[17] = new EndNode(265, 705, null, "2A1"); 
+        floorB[14] = new EndNode(380, 379, null, "BE01 Elevator");
+        floorB[16] = new EndNode(265, 705, null, "2A");
+        floorB[17] = new EndNode(265, 705, null, "2A1");
         floorB[31] = new EndNode(248, 140, null, "1B");
-        floorB[33] = new EndNode(194, 263, null, "1A"); 
-        floorB[34] = new EndNode(321, 240, null, "1L"); 
-        floorB[35] = new EndNode(372, 240, null, "1K"); 
-        floorB[36] = new EndNode(419, 270, null, "1J"); 
-        floorB[37] = new EndNode(433, 69, null, "1F"); 
-        floorB[38] = new EndNode(414, 69, null, "1E"); 
-        floorB[39] = new EndNode(343, 69, null, "1D"); 
-        floorB[40] = new EndNode(322, 69, null, "1C"); 
-        floorB[41] = new EndNode(275, 109, null, "1B3"); 
-        floorB[42] = new EndNode(256, 69, null, "1B2"); 
+        floorB[33] = new EndNode(194, 263, null, "1A");
+        floorB[34] = new EndNode(321, 240, null, "1L");
+        floorB[35] = new EndNode(372, 240, null, "1K");
+        floorB[36] = new EndNode(419, 270, null, "1J");
+        floorB[37] = new EndNode(433, 69, null, "1F");
+        floorB[38] = new EndNode(414, 69, null, "1E");
+        floorB[39] = new EndNode(343, 69, null, "1D");
+        floorB[40] = new EndNode(322, 69, null, "1C");
+        floorB[41] = new EndNode(275, 109, null, "1B3");
+        floorB[42] = new EndNode(256, 69, null, "1B2");
         floorB[43] = new EndNode(189, 82, null, "1B1");
         floorB[46] = new EndNode(120, 251, null, "BS01");
 
@@ -98,7 +98,7 @@ class Map {
 
         // ----------Floor 2-----------
         let floor2 = this.Eaton.floor[2].nodes;
-        
+
         floor2[0] = new Node(120,220);
         floor2[1] = new Node(100,220);
         floor2[2] = new Node(100,286);
@@ -114,7 +114,7 @@ class Map {
         floor2[12] = new Node(786,330);
         floor2[13] = new Node(898,330);
         floor2[14] = new Node(926,330);
-        floor2[15] = new EndNode(1005,330, null, "Learned walkway");
+        floor2[15] = new EndNode(1005,330, null, "Skywalk Entrance");
         floor2[16] = new EndNode(926,377, null, "2S02");
         floor2[17] = new Node(953,377);
         floor2[18] = new Node(953,452);
@@ -217,7 +217,7 @@ class Map {
         floor2[115] = new Node(290,280);
         floor2[116] = new EndNode(332,280, 2003, null);
         floor2[117] = new Node(376,280);
-        
+
     } //end declareNodesEaton()
 
     /**
@@ -234,7 +234,7 @@ class Map {
         floorB[1].vertices = [ floorB[45], floorB[2], floorB[3] ];
         floorB[2].vertices = [ floorB[1], floorB[11], floorB[12] ];
         floorB[3].vertices = [ floorB[1], floorB[4], floorB[9], floorB[13] ];
-        floorB[4].vertices = [ floorB[3], floorB[5], floorB[8] ];   
+        floorB[4].vertices = [ floorB[3], floorB[5], floorB[8] ];
         floorB[5].vertices = [ floorB[4], floorB[6], floorB[7] ];
         floorB[6].vertices = [ floorB[5], floorB[10] ];
         floorB[7].vertices = [ floorB[5] ];
@@ -411,7 +411,7 @@ class Map {
         floor2[115].vertices = [ floor2[7], floor2[116] ];
         floor2[116].vertices = [ floor2[115], floor2[117] ];
         floor2[117].vertices = [ floor2[116], floor2[8] ];
-        
+
 
     } // end setupConnectionsEaton()
 
@@ -455,7 +455,7 @@ class Floor {
  * Represents a vertex in the node map
  */
 class Node {
-    
+
     /**
      * Creates a Node.
      * @param {number} x_coord - The x-coordinate to place the Node at.
@@ -787,14 +787,14 @@ let searchroomid = document.getElementById('searchroomid').value;//the text box
 
 
 
-//let selectedfloor = document.getElementById('floor_level').value;//the floors button 
+//let selectedfloor = document.getElementById('floor_level').value;//the floors button
 
     // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     //Selected Floor no longer exists (for the sake of diag, it is commented out in index.html @line 58)
     //Needs updating for path to generate
 
 
-let startloaction = document.getElementById('starting_location').value;//the the start location button 
+let startloaction = document.getElementById('starting_location').value;//the the start location button
 let moreThanOnce = 0;
 let targetDiv = document.getElementById('Eaton_g_floor_svg');
 let svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -810,7 +810,6 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
   }
   targetDiv.appendChild(svgNode);
   searchroomid = document.getElementById('searchroomid').value;
-  selectedfloor = document.getElementById('floor_level').value;
   startloaction = document.getElementById('starting_location').value;
   document.querySelector("#searchroomid").addEventListener('keyup', (roomid) => {
       searchroomid = roomid.target.value.toLowerCase();
@@ -822,17 +821,17 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
     let startnodenumber = floorGsearch.returnnodelocation(startloaction);
 
     let floornumber = 0;
-    switch (selectedfloor) {
-      case "Ground Floor":
+    switch (startloaction) {
+      case "Front Entrance":
         floornumber = 0;
         break;
-      case "Floor 1":
+      case "East Entrance":
+        floornumber = 0;
+        break;
+      case "North Entrance":
         floornumber = 1;
         break;
-      case "Floor 2":
-        floornumber = 2;
-        break;
-      case "Floor 3":
+      case "Skywalk Entrance":
         floornumber = 3;
         break;
       default:
@@ -847,7 +846,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
       {
         let pather = new Pathfinder(map.nodeMap, map.Eaton.floor[floornumber].nodes[startnodenumber]);
         let path = pather.getPathTo(map.Eaton.floor[floornumber].nodes[inputnodenumber]);
-        
+
         while (path.length != 0) {
             let n = path.pop();
             test_Arr.push(n.x_coord);
@@ -912,7 +911,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
 function openFloor(event, floorName) {
 
     let i, tabObj, tabPath;
-    
+
     tabObj = document.getElementsByClassName("floorCont");
   for (i = 0; i < tabObj.length; i++) {
     tabObj[i].style.display = "none";
@@ -942,4 +941,3 @@ while (p.length > 0) {
 
 document.getElementById("pageDefault").click();
 document.getElementById("pageDefault").focus();
-
