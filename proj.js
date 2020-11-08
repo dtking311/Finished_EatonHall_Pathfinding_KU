@@ -403,7 +403,7 @@ class Map {
         floorB[5].vertices = [ floorB[4], floorB[6], floorB[7] ];
         floorB[6].vertices = [ floorB[5], floorB[10] ];
         floorB[7].vertices = [ floorB[5] ];
-        floorB[8].vertices = [ floorB[4] ];
+        floorB[8].vertices = [ floorB[4], floor1[0] ];
         floorB[9].vertices = [ floorB[3], floorB[18] ];
         floorB[10].vertices = [ floorB[6], floorB[11], floorB[12], floorB[15] ];
         floorB[11].vertices = [ floorB[2], floorB[10] ];
