@@ -822,16 +822,16 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
 
     let floornumber = 0;
     switch (startloaction) {
-      case "Front Entrance":
+      case "front entrance":
         floornumber = 0;
         break;
-      case "East Entrance":
+      case "east entrance":
         floornumber = 0;
         break;
-      case "North Entrance":
+      case "north entrance":
         floornumber = 1;
         break;
-      case "Skywalk Entrance":
+      case "skywalk entrance":
         floornumber = 3;
         break;
       default:
