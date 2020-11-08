@@ -868,21 +868,26 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
       startnodenumber = floor3search.returnnodelocation(startloaction)
     }
 
+    let inputfloornum = 0;
     if (floorgvaild == true)
     {
       inputnodenumber = floorGsearch.returnnodelocation(searchroomid)
+      inputfloornum = 0;
     }
     else if (floor1vaild == true)
     {
       inputnodenumber = floor1search.returnnodelocation(searchroomid)
+      inputfloornum = 1;
     }
     else if (floor2vaild == true)
     {
       inputnodenumber = floor2search.returnnodelocation(searchroomid)
+      inputfloornum = 2;
     }
     else if (floor3vaild == true)
     {
       inputnodenumber = floor3search.returnnodelocation(searchroomid)
+      inputfloornum = 3;
     }
 
     let test_Arr = [];
@@ -891,7 +896,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
       if (floorgstart == true || floor1start == true || floor2start == true || floor3start == true )
       {
         let pather = new Pathfinder(map.nodeMap, map.Eaton.floor[floornumber].nodes[startnodenumber]);
-        let path = pather.getPathTo(map.Eaton.floor[floornumber].nodes[inputnodenumber]);
+        let path = pather.getPathTo(map.Eaton.floor[inputfloornum].nodes[inputnodenumber]);
 
         while (path.length != 0) {
             let n = path.pop();
