@@ -817,8 +817,8 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
     searchroomid = searchroomid.toLowerCase();// makes the input name lower case
     startloaction = startloaction.toLowerCase();// makes the start loaction name lower case
 
-    let inputnodenumber = floorGsearch.returnnodelocation(searchroomid);
-    let startnodenumber = floorGsearch.returnnodelocation(startloaction);
+    let inputnodenumber = 0;
+    let startnodenumber = 0;
 
     let floornumber = 0;
     switch (startloaction) {
@@ -832,26 +832,58 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
         floornumber = 1;
         break;
       case "skywalk entrance":
-        floornumber = 3;
+        floornumber = 2;
         break;
       default:
         floornumber = 0;
         break;
     }
 
+    //checks each floor to see if it has the inputed room
     let floorgvaild = floorGsearch.vaildinput(searchroomid);
     let floor1vaild = floor1search.vaildinput(searchroomid);
     let floor2vaild = floor2search.vaildinput(searchroomid);
     let floor3vaild = floor3search.vaildinput(searchroomid);
 
+    //checks each floor to see if it has the start room
     let floorgstart = floorGsearch.vaildinput(startloaction);
     let floor1start = floor1search.vaildinput(startloaction);
     let floor2start = floor2search.vaildinput(startloaction);
     let floor3start = floor3search.vaildinput(startloaction);
 
-    console.log(startloaction);
-    console.log(searchroomid);
+    if (floorgstart == true)
+    {
+      startnodenumber = floorGsearch.returnnodelocation(startloaction)
+    }
+    else if (floor1start == true)
+    {
+      startnodenumber = floor1search.returnnodelocation(startloaction)
+    }
+    else if (floor2start == true)
+    {
+      startnodenumber = floor2search.returnnodelocation(startloaction)
+    }
+    else if (floor3start == true)
+    {
+      startnodenumber = floor3search.returnnodelocation(startloaction)
+    }
 
+    if (floorgvaild == true)
+    {
+      inputnodenumber = floorGsearch.returnnodelocation(searchroomid)
+    }
+    else if (floor1vaild == true)
+    {
+      inputnodenumber = floor1search.returnnodelocation(searchroomid)
+    }
+    else if (floor2vaild == true)
+    {
+      inputnodenumber = floor2search.returnnodelocation(searchroomid)
+    }
+    else if (floor3vaild == true)
+    {
+      inputnodenumber = floor3search.returnnodelocation(searchroomid)
+    }
 
     let test_Arr = [];
     if (floorgvaild == true || floor1vaild == true || floor2vaild == true || floor3vaild == true )
