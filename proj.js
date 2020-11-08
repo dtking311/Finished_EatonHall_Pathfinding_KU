@@ -905,7 +905,7 @@ class PriorityQueue {
 
         this.queue.splice(index, 1); // Removing the old element
         this.enqueue(element, priority); // Adding the element again with new priority
-        console.log("Set distance of node at " + element.x_coord + ' ' + element.y_coord + " to " + priority);
+        //console.log("Set distance of node at " + element.x_coord + ' ' + element.y_coord + " to " + priority);
     }
 
     /**
@@ -992,7 +992,7 @@ class Pathfinder {
             let u = this.priorityQueue.dequeue().element;
             let uIndex = this.nodes.indexOf(u);
 
-            console.log("Current node is at " + u.x_coord + ' ' + u.y_coord);
+            //console.log("Current node is at " + u.x_coord + ' ' + u.y_coord);
 
             for (var i = 0; i < u.vertices.length; i++) {
                 let v = u.vertices[i];
@@ -1002,7 +1002,7 @@ class Pathfinder {
 
                 // Make sure the vertex has not been visited yet
                 if (!this.visited.includes(v)) {
-                    console.log("Examining vertex at " + v.x_coord + ' ' + v.y_coord);
+                    //console.log("Examining vertex at " + v.x_coord + ' ' + v.y_coord);
                     // Calculate distance b/w Nodes u and v
                     let dist = this.distances[uIndex] + this.distanceBetween(u, v);
 
@@ -1106,32 +1106,85 @@ class Search {
 }
 
 //-----------------------------------Runtime-------------------------------------
+
+//variables
 let searchroomid = document.getElementById('searchroomid').value;//the text box
-
-
-
-//let selectedfloor = document.getElementById('floor_level').value;//the floors button
-
-    // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    //Selected Floor no longer exists (for the sake of diag, it is commented out in index.html @line 58)
-    //Needs updating for path to generate
-
-
 let startloaction = document.getElementById('starting_location').value;//the the start location button
-let moreThanOnce = 0;
-let targetDiv = document.getElementById('Eaton_g_floor_svg');
-let svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-svgNode.setAttributeNS(null, "id", "createdPath");
+let usedGFloor = false;
+let usedOneFloor = false;
+let usedTwoFloor = false;
+let usedThreeFloor = false;
+
+//setting up access to the svg files so that they can later be edited-----------------------------------
+let gFloorDiv = document.getElementById('Eaton_g_floor_svg');
+let firstFloorDiv = document.getElementById('Eaton_1_floor_svg');
+let secondFloorDiv = document.getElementById('Eaton_2_floor_svg');
+let thirdFloorDiv = document.getElementById('Eaton_3_floor_svg');
+
+let svgGNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+svgGNode.setAttributeNS(null, "id", "createdGPath");
+
+let svgOneNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+svgOneNode.setAttributeNS(null, "id", "created1Path");
+
+let svgTwoNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+svgTwoNode.setAttributeNS(null, "id", "created2Path");
+
+let svgThreeNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+svgThreeNode.setAttributeNS(null, "id", "created3Path");
+//------------------------------------------------------------------------------------------------------
 
 document.querySelector("#searchbutton").addEventListener('click',  function () {
-  if (moreThanOnce > 0)
+  
+  //this resets the path so if the user uses the website repeatedly without refreshing the page, the old path is removed for the new one
+  if (usedGFloor)
   {
-    let createdPath = document.getElementById('createdPath');
-    targetDiv.removeChild(createdPath);
-    svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svgNode.setAttributeNS(null, "id", "createdPath");
+    let createdPath = document.getElementById('createdGPath');
+    gFloorDiv.removeChild(createdPath);
+
+    svgGNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgGNode.setAttributeNS(null, "id", "createdGPath");
+  
+    usedGFloor = false;
   }
-  targetDiv.appendChild(svgNode);
+  if (usedOneFloor)
+  {
+    let createdPath = document.getElementById('created1Path');
+    firstFloorDiv.removeChild(createdPath);
+
+    svgOneNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgOneNode.setAttributeNS(null, "id", "created1Path");
+
+    usedOneFloor = false;
+  }
+  if (usedTwoFloor)
+  {
+    let createdPath = document.getElementById('created2Path');
+    secondFloorDiv.removeChild(createdPath);
+
+    svgTwoNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgTwoNode.setAttributeNS(null, "id", "created2Path");
+
+    usedTwoFloor = false;
+  }
+  if (usedThreeFloor)
+  {
+    let createdPath = document.getElementById('created3Path');
+    thirdFloorDiv.removeChild(createdPath);
+
+    svgThreeNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgThreeNode.setAttributeNS(null, "id", "created3Path");
+
+    usedThreeFloor = false;
+  }
+
+  //attached the new svg container to the floors
+  gFloorDiv.appendChild(svgGNode);
+  firstFloorDiv.appendChild(svgOneNode);
+  secondFloorDiv.appendChild(svgTwoNode);
+  thirdFloorDiv.appendChild(svgThreeNode);
+
+  //variables
   searchroomid = document.getElementById('searchroomid').value;
   startloaction = document.getElementById('starting_location').value;
   document.querySelector("#searchroomid").addEventListener('keyup', (roomid) => {
@@ -1227,6 +1280,10 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
             test_Arr.push(n.y_coord);
         }
 
+        let passedGFloor = false;
+        let passedOneFloor = false;
+        let passedTwoFloor = false;
+        let passedThreeFloor = false;
         let j = 0;
         let last_coords = [test_Arr[0], test_Arr[1]];
         for (let i = 0; i < test_Arr.length/2; ++i)
@@ -1256,8 +1313,307 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
             }
             tempLine.setAttributeNS(null, 'stroke', 'blue');
             tempLine.setAttributeNS(null, 'stroke-width', '5');
-            svgNode.appendChild(tempNode);
-            svgNode.appendChild(tempLine);
+
+            if (floorgvaild) //final destination is on the ground floor
+            {
+              if (floorgstart)
+              {
+                svgGNode.appendChild(tempNode);
+                svgGNode.appendChild(tempLine);
+              }
+              else if (floor1start)
+              {
+                if (passedOneFloor) //if already been through floor 1
+                {
+                  svgGNode.appendChild(tempNode);
+                  svgGNode.appendChild(tempLine);
+                }
+                else
+                {
+                  if ((last_coords[0] == "600" && last_coords[1] == "465") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427")) //went into stairs or elevator
+                  {
+                    passedOneFloor = true;                   
+                  }
+                  else
+                  {
+                    svgOneNode.appendChild(tempNode);
+                    svgOneNode.appendChild(tempLine); 
+                  }
+                }                
+                usedOneFloor = true;
+              }
+              else if (floor2start)
+              {
+                if (passedTwoFloor) //if already been through floor 2
+                {
+                  if (passedOneFloor) //if already been through floor 1
+                  {
+                    svgGNode.appendChild(tempNode);
+                    svgGNode.appendChild(tempLine);
+                  }
+                  else
+                  {
+                    if ((last_coords[0] == "600" && last_coords[1] == "465") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427")) //went into stairs or elevator
+                    {
+                      passedOneFloor = true;                   
+                    }
+                    else
+                    {
+                      svgOneNode.appendChild(tempNode);
+                      svgOneNode.appendChild(tempLine); 
+                    }
+                  }                     
+                }
+                else
+                {
+                  if ((last_coords[0] == "619" && last_coords[1] == "297") || (last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "438" && last_coords[1] == "365") || (last_coords[0] == "926" && last_coords[1] == "377")) //went into stairs or elevator
+                  {
+                    passedTwoFloor = true;                   
+                  }
+                  else
+                  {
+                    svgTwoNode.appendChild(tempNode);
+                    svgTwoNode.appendChild(tempLine); 
+                  }
+                }               
+                usedOneFloor = true;
+                usedTwoFloor = true;
+              }
+              usedGFloor = true;             
+            }
+            else if (floor1vaild) //final destination is on the first floor
+            {
+              if (floorgstart) //started from ground entrance
+              {
+                if (passedGFloor) //if already moved on from the ground floor
+                {
+                  svgOneNode.appendChild(tempNode);
+                  svgOneNode.appendChild(tempLine);
+                }
+                else //still placing nodes on ground floor
+                {
+                  if ((last_coords[0] == "120" && last_coords[1] == "251") || (last_coords[0] == "449" && last_coords[1] == "416") || (last_coords[0] == "380" && last_coords[1] == "379")) //went into stairs or elevator
+                  {
+                    passedGFloor = true;                   
+                  }
+                  else
+                  {
+                    svgGNode.appendChild(tempNode);
+                    svgGNode.appendChild(tempLine); 
+                  }
+                }
+                usedGFloor = true;
+              }
+              else if (floor1start) //started on floor 1
+              {
+                svgOneNode.appendChild(tempNode);
+                svgOneNode.appendChild(tempLine);
+              }
+              else if (floor2start) //started on floor 2
+              {
+                if (passedTwoFloor) //if already been through floor 2
+                {
+                  svgOneNode.appendChild(tempNode);
+                  svgOneNode.appendChild(tempLine);
+                }
+                else
+                {
+                  if ((last_coords[0] == "619" && last_coords[1] == "297") || (last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "438" && last_coords[1] == "365") || (last_coords[0] == "926" && last_coords[1] == "377")) //went into stairs or elevator
+                  {
+                    passedTwoFloor = true;                   
+                  }
+                  else
+                  {
+                    svgTwoNode.appendChild(tempNode);
+                    svgTwoNode.appendChild(tempLine); 
+                  }
+                }
+                usedTwoFloor = true;
+              }
+              usedOneFloor = true;
+            }
+            else if (floor2vaild) //final destination is on the second floor
+            {
+              if (floorgstart)
+              {
+                if (passedGFloor) //if already moved on from the ground floor
+                {
+                  if (passedOneFloor) //if already been through floor 1
+                  {
+                    svgTwoNode.appendChild(tempNode);
+                    svgTwoNode.appendChild(tempLine);
+                  }
+                  else
+                  {
+                    if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1088" && last_coords[1] == "443")) //went into stairs or elevator
+                    {
+                      passedOneFloor = true;                   
+                    }
+                    else
+                    {
+                      svgOneNode.appendChild(tempNode);
+                      svgOneNode.appendChild(tempLine); 
+                    }
+                  }                    
+                }
+                else //still placing nodes on ground floor
+                {
+                  if ((last_coords[0] == "120" && last_coords[1] == "251") || (last_coords[0] == "449" && last_coords[1] == "416") || (last_coords[0] == "380" && last_coords[1] == "379")) //went into stairs or elevator
+                  {
+                    passedGFloor = true;                   
+                  }
+                  else
+                  {
+                    svgGNode.appendChild(tempNode);
+                    svgGNode.appendChild(tempLine); 
+                  }
+                }                
+                usedGFloor = true;
+                usedOneFloor = true;
+              }
+              else if (floor1start)
+              {
+                if (passedOneFloor) //if already been through floor 1
+                {
+                  svgTwoNode.appendChild(tempNode);
+                  svgTwoNode.appendChild(tempLine);
+                }
+                else
+                {
+                  if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1088" && last_coords[1] == "443")) //went into stairs or elevator
+                  {
+                    passedOneFloor = true;                   
+                  }
+                  else
+                  {
+                    svgOneNode.appendChild(tempNode);
+                    svgOneNode.appendChild(tempLine); 
+                  }
+                }                     
+                usedOneFloor = true;
+              }
+              else if (floor2start)
+              {
+                svgTwoNode.appendChild(tempNode);
+                svgTwoNode.appendChild(tempLine);                
+              }
+              usedTwoFloor = true;
+            }
+            else if (floor3vaild) //final destination is on the third floor
+            {
+              if (floorgstart)
+              {
+                if (passedGFloor) //if already moved on from the ground floor
+                {
+                  if (passedOneFloor) //if already been through floor 1
+                  {
+                    if (passedTwoFloor) //if already been through floor 2
+                    {
+                      svgThreeNode.appendChild(tempNode);
+                      svgThreeNode.appendChild(tempLine);
+                    }
+                    else
+                    {
+                      if ((last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "926" && last_coords[1] == "377") || (last_coords[0] == "438" && last_coords[1] == "365")) //went into stairs or elevator
+                      {
+                        passedTwoFloor = true;                   
+                      }
+                      else
+                      {
+                        svgTwoNode.appendChild(tempNode);
+                        svgTwoNode.appendChild(tempLine); 
+                      }
+                    }
+                  }
+                  else
+                  {
+                    if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1088" && last_coords[1] == "443")) //went into stairs or elevator
+                    {
+                      passedOneFloor = true;                   
+                    }
+                    else
+                    {
+                      svgOneNode.appendChild(tempNode);
+                      svgOneNode.appendChild(tempLine); 
+                    }
+                  }                    
+                }
+                else //still placing nodes on ground floor
+                {
+                  if ((last_coords[0] == "120" && last_coords[1] == "251") || (last_coords[0] == "449" && last_coords[1] == "416") || (last_coords[0] == "380" && last_coords[1] == "379")) //went into stairs or elevator
+                  {
+                    passedGFloor = true;                   
+                  }
+                  else
+                  {
+                    svgGNode.appendChild(tempNode);
+                    svgGNode.appendChild(tempLine); 
+                  }
+                }  
+                usedGFloor = true;                
+                usedOneFloor = true;
+                usedTwoFloor = true;
+              }
+              else if (floor1start)
+              {
+                if (passedOneFloor) //if already been through floor 1
+                {
+                  if (passedTwoFloor) //if already been through floor 2
+                  {
+                    svgThreeNode.appendChild(tempNode);
+                    svgThreeNode.appendChild(tempLine);
+                  }
+                  else
+                  {
+                    if ((last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "926" && last_coords[1] == "377") || (last_coords[0] == "438" && last_coords[1] == "365")) //went into stairs or elevator
+                    {
+                      passedTwoFloor = true;                   
+                    }
+                    else
+                    {
+                      svgTwoNode.appendChild(tempNode);
+                      svgTwoNode.appendChild(tempLine); 
+                    }
+                  }
+                }
+                else
+                {
+                  if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1088" && last_coords[1] == "443")) //went into stairs or elevator
+                  {
+                    passedOneFloor = true;                   
+                  }
+                  else
+                  {
+                    svgOneNode.appendChild(tempNode);
+                    svgOneNode.appendChild(tempLine); 
+                  }
+                }                            
+                usedOneFloor = true;
+                usedTwoFloor = true;
+              }
+              else if (floor2start)
+              {
+                if (passedTwoFloor) //if already been through floor 2
+                {
+                  svgThreeNode.appendChild(tempNode);
+                  svgThreeNode.appendChild(tempLine);
+                }
+                else
+                {
+                  if ((last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "926" && last_coords[1] == "377") || (last_coords[0] == "438" && last_coords[1] == "365")) //went into stairs or elevator
+                  {
+                    passedTwoFloor = true;                   
+                  }
+                  else
+                  {
+                    svgTwoNode.appendChild(tempNode);
+                    svgTwoNode.appendChild(tempLine); 
+                  }
+                }                
+                usedTwoFloor = true;
+              }
+              usedThreeFloor = true;
+            }
             last_coords[0] = test_Arr[j-2];
             last_coords[1] = test_Arr[j-1];
         }
@@ -1268,7 +1624,22 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
         tempNode.setAttributeNS(null, 'cy', test_Arr[1]);
         tempNode.setAttributeNS(null, 'r', '7');
         tempNode.setAttributeNS(null, 'fill', 'red');
-        svgNode.appendChild(tempNode);
+        if (floorgstart)
+        {
+          svgGNode.appendChild(tempNode);
+        }
+        else if (floor1start)
+        {
+          svgOneNode.appendChild(tempNode);
+        }
+        else if (floor2start)
+        {
+          svgTwoNode.appendChild(tempNode);
+        }
+        else if (floor3start)
+        {
+          svgThreeNode.appendChild(tempNode);
+        }
       }
       else
       {
@@ -1279,7 +1650,6 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
     {
       alert("not a valid input ")
     }
-   moreThanOnce++;
 });
 
 function openFloor(event, floorName) {
@@ -1301,20 +1671,11 @@ function openFloor(event, floorName) {
 
 }
 
-
 let map = new Map;
 let floorGsearch = new Search(map.Eaton.floor[0].nodes);
 let floor1search = new Search(map.Eaton.floor[1].nodes);
 let floor2search = new Search(map.Eaton.floor[2].nodes);
 let floor3search = new Search(map.Eaton.floor[3].nodes);
-
-let pathfinder = new Pathfinder(map.nodeMap, map.Eaton.floor[0].nodes[0]);
-let p = pathfinder.getPathTo(map.Eaton.floor[1].nodes[4]);
-console.log("Path from front entrance to Career center");
-while (p.length > 0) {
-    let node = p.pop();
-    console.log(node.x_coord + ' ' + node.y_coord);
-}
 
 document.getElementById("pageDefault").click();
 document.getElementById("pageDefault").focus();
