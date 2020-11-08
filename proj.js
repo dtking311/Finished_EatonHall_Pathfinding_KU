@@ -94,6 +94,7 @@ class Map {
         floor1[12] = new Node(658, 313);
         floor1[13] = new Node(658, 284);
         floor1[14] = new Node(600, 391);
+        floor1[15] = new Node(140, 391);
         floor1[16] = new Node(196, 391);
         floor1[18] = new Node(196, 242);
         floor1[19] = new Node(225, 242);
@@ -119,6 +120,12 @@ class Map {
         floor1[58] = new Node(831, 440);
         floor1[59] = new Node(869, 440);
         floor1[60] = new Node(831, 494);
+        floor1[61] = new Node(1088,523);
+        floor1[62] = new Node(1115,523);
+        floor1[64] = new Node(114,340);
+        floor1[65] = new Node(114,263);
+        floor1[66] = new Node(140,263);
+        floor1[67] = new Node(694,368);
         
         //Destination nodes
         floor1[0] = new EndNode(600, 465, null, "Stairs");
@@ -127,7 +134,6 @@ class Map {
         floor1[9] = new EndNode(452, 100, null, "1005C");
         floor1[11] = new EndNode(482, 100, null, "1005D");
         floor1[10] = new EndNode(421, 247, null, "1005B");
-        floor1[15] = new EndNode(140, 391, null, "1S01");
         floor1[17] = new EndNode(196, 321, 1001, "Engineering Career Center");
         floor1[27] = new EndNode(252, 211, null, "1001L");
         floor1[28] = new EndNode(201, 195, null, "1001A");
@@ -145,9 +151,12 @@ class Map {
         floor1[51] = new EndNode(987, 446, null, "1016");
         floor1[52] = new EndNode(941, 446, null, "1015");
         floor1[53] = new EndNode(1033, 500, null, "1018");
-        floor1[54] = new EndNode(1088, 443, null, "Skywalk Entrance");
+        floor1[54] = new EndNode(1088, 443, null, "1S02");
         floor1[55] = new EndNode(1088, 389, null, "North Entrance");
         floor1[57] = new EndNode(806, 448, null, "1012");
+        floor1[63] = new EndNode(140,340, null, "1S01");
+        floor1[68] = new EndNode(751,338, null, "Floor 1 Computing Commons Stairs");
+        floor1[69] = new EndNode(517,427, null, "1E01 Elevator");
 
         // ----------Floor 2-----------
         let floor2 = this.Eaton.floor[2].nodes;
@@ -400,7 +409,7 @@ class Map {
         floorB[11].vertices = [ floorB[2], floorB[10] ];
         floorB[12].vertices = [ floorB[2], floorB[10] ];
         floorB[13].vertices = [ floorB[3], floorB[18] ];
-        floorB[14].vertices = [ floorB[3], floorB[4] ];
+        floorB[14].vertices = [ floorB[3], floorB[4], floor1[69] ];
         floorB[15].vertices = [ floorB[10], floorB[16], floorB[17] ];
         floorB[16].vertices = [ floorB[15] ];
         floorB[17].vertices = [ floorB[15] ];
@@ -432,12 +441,10 @@ class Map {
         floorB[43].vertices = [ floorB[32] ];
         floorB[44].vertices = [ floorB[31], floorB[30], floorB[32] ];
         floorB[45].vertices = [ floorB[0], floorB[1], floorB[46] ];
-        floorB[46].vertices = [ floorB[45], floor1[5] ];
-
-        floorB[8].vertices.push(floor1[0]); // temp connection between floors
+        floorB[46].vertices = [ floorB[45], floor1[66] ];
 
         // Floor 1
-        floor1[0].vertices = [ floor1[14], floor1[37], floor1[43] ];
+        floor1[0].vertices = [ floor1[14], floor1[37], floor1[43], floorB[8], floor1[67] ];
         floor1[1].vertices = [ floor1[14], floor1[12], floor1[2] ];
         floor1[2].vertices = [ floor1[3], floor1[6], floor1[1] ];
         floor1[3].vertices = [ floor1[2], floor1[4], floor1[6], floor1[10] ];
@@ -451,8 +458,8 @@ class Map {
         floor1[11].vertices = [ floor1[8] ];
         floor1[12].vertices = [ floor1[1], floor1[13] ];
         floor1[13].vertices = [ floor1[5], floor1[12] ];
-        floor1[14].vertices = [ floor1[0], floor1[1], floor1[43], floor1[16], floor1[37] ];
-        floor1[15].vertices = [ floor1[16] ];
+        floor1[14].vertices = [ floor1[0], floor1[1], floor1[43], floor1[16], floor1[37], floor1[69], floor1[67] ];
+        floor1[15].vertices = [ floor1[16], floor1[63] ];
         floor1[16].vertices = [ floor1[14], floor1[15], floor1[17] ];
         floor1[17].vertices = [ floor1[18], floor1[16] ];
         floor1[18].vertices = [ floor1[17], floor1[19] ];
@@ -480,7 +487,7 @@ class Map {
         floor1[40].vertices = [ floor1[39], floor1[41] ];
         floor1[41].vertices = [ floor1[40], floor1[42] ];
         floor1[42].vertices = [ floor1[41] ];
-        floor1[43].vertices = [ floor1[0], floor1[14], floor1[44], floor1[49] ];
+        floor1[43].vertices = [ floor1[0], floor1[14], floor1[44], floor1[49], floor1[69], floor1[67] ];
         floor1[44].vertices = [ floor1[43], floor1[45], floor1[59] ];
         floor1[45].vertices = [ floor1[44], floor1[46], floor1[51] ];
         floor1[46].vertices = [ floor1[45], floor1[47], floor1[55] ];
@@ -491,16 +498,25 @@ class Map {
         floor1[51].vertices = [ floor1[45], floor1[52] ];
         floor1[52].vertices = [ floor1[51] ];
         floor1[53].vertices = [ floor1[48] ];
-        floor1[54].vertices = [ floor1[47] ];
+        floor1[54].vertices = [ floor1[47], floor1[61] ];
         floor1[55].vertices = [ floor1[46] ];
         floor1[56].vertices = [ floor1[49], floor1[57] ];
         floor1[57].vertices = [ floor1[56], floor1[58] ];
         floor1[58].vertices = [ floor1[57], floor1[59], floor1[60] ];
         floor1[59].vertices = [ floor1[44], floor1[50], floor1[58] ];
         floor1[60].vertices = [ floor1[50], floor1[58] ];
+        floor1[61].vertices = [ floor1[54], floor1[62] ];
+        floor1[62].vertices = [ floor1[61], floor2[19] ];
+        floor1[63].vertices = [ floor1[15], floor1[64], floor2[0] ];
+        floor1[64].vertices = [ floor1[63], floor1[65] ];
+        floor1[65].vertices = [ floor1[64], floor1[66] ];
+        floor1[66].vertices = [ floor1[65], floorB[46] ];
+        floor1[67].vertices = [ floor1[14], floor1[0], floor1[69], floor1[43], floor1[68] ];
+        floor1[68].vertices = [ floor1[67], floor2[21] ];
+        floor1[69].vertices = [ floor1[14], floor1[43], floor1[67], floorB[14], floor2[25] ];
 
         // Floor 2
-        floor2[0].vertices = [ /* floor1 stairwell 01 */, floor2[1] ];
+        floor2[0].vertices = [ floor1[63], floor2[1] ];
         floor2[1].vertices = [ floor2[0], floor2[2] ];
         floor2[2].vertices = [ floor2[1], floor2[3] ];
         floor2[3].vertices = [ floor2[2], floor2[4], floor3[0] ];
@@ -519,13 +535,13 @@ class Map {
         floor2[16].vertices = [ floor3[20], floor2[14], floor2[17] ];
         floor2[17].vertices = [ floor2[16], floor2[18] ];
         floor2[18].vertices = [ floor2[17], floor2[19] ];
-        floor2[19].vertices = [ floor2[18], /* floor1 stairwell 02 */ ];
+        floor2[19].vertices = [ floor2[18], floor1[62] ];
         floor2[20].vertices = [ floor2[11], floor2[21] ];
-        floor2[21].vertices = [ floor2[20], /* floor1 computing commons stairs */ ];
+        floor2[21].vertices = [ floor2[20], floor1[68] ];
         floor2[22].vertices = [ floor2[12], floor2[23] ];
         floor2[23].vertices = [ floor2[22], floor2[24] ];
         floor2[24].vertices = [ floor2[23], floor2[13] ];
-        floor2[25].vertices = [ /* floor1 elevator */, floor3[10], floor2[9] ];
+        floor2[25].vertices = [ floor1[69], floor3[10], floor2[9] ];
         floor2[26].vertices = [ floor2[10], floor2[27] ];
         floor2[27].vertices = [ floor2[26], floor2[28] ];
         floor2[28].vertices = [ floor2[27], floor2[29] ];
