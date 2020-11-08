@@ -19,7 +19,7 @@ class Map {
 
         // Concatenate all of the node arrays into a single node map. This allows pathfinder to get between floors.
         // If this ends up working out, will need to add the other floors to the concat.
-        this.nodeMap = this.Eaton.floor[0].nodes.concat(this.Eaton.floor[1].nodes);
+        this.nodeMap = this.Eaton.floor[0].nodes.concat(this.Eaton.floor[1].nodes, this.Eaton.floor[2].nodes, this.Eaton.floor[3].nodes);
 
     } // end constructor
 
