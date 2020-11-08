@@ -839,10 +839,24 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
         break;
     }
 
+    let floorgvaild = floorGsearch.vaildinput(searchroomid);
+    let floor1vaild = floor1search.vaildinput(searchroomid);
+    let floor2vaild = floor2search.vaildinput(searchroomid);
+    let floor3vaild = floor3search.vaildinput(searchroomid);
+
+    let floorgstart = floorGsearch.vaildinput(startloaction);
+    let floor1start = floor1search.vaildinput(startloaction);
+    let floor2start = floor2search.vaildinput(startloaction);
+    let floor3start = floor3search.vaildinput(startloaction);
+
+    console.log(startloaction);
+    console.log(searchroomid);
+
+
     let test_Arr = [];
-    if (floorGsearch.vaildinput(searchroomid) == true)
+    if (floorgvaild == true || floor1vaild == true || floor2vaild == true || floor3vaild == true )
     {
-      if (floorGsearch.vaildinput(startloaction) == true)
+      if (floorgstart == true || floor1start == true || floor2start == true || floor3start == true )
       {
         let pather = new Pathfinder(map.nodeMap, map.Eaton.floor[floornumber].nodes[startnodenumber]);
         let path = pather.getPathTo(map.Eaton.floor[floornumber].nodes[inputnodenumber]);
@@ -930,6 +944,9 @@ function openFloor(event, floorName) {
 
 let map = new Map;
 let floorGsearch = new Search(map.Eaton.floor[0].nodes);
+let floor1search = new Search(map.Eaton.floor[1].nodes);
+let floor2search = new Search(map.Eaton.floor[2].nodes);
+let floor3search = new Search(map.Eaton.floor[3].nodes);
 
 let pathfinder = new Pathfinder(map.nodeMap, map.Eaton.floor[0].nodes[0]);
 let p = pathfinder.getPathTo(map.Eaton.floor[1].nodes[4]);
