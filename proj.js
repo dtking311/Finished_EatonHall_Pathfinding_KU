@@ -64,7 +64,7 @@ class Map {
         floorB[13] = new EndNode(240, 315, null, "Dean's Office");
         floorB[11] = new EndNode(183, 560, 1006, "Spahr Classroom");
         floorB[12] = new EndNode(183, 560, null, "2");
-        floorB[14] = new EndNode(380, 379, null, "BE01 Elevator");
+        floorB[14] = new EndNode(380, 379, 0, "BE01 Elevator");
         floorB[16] = new EndNode(265, 705, null, "2A");
         floorB[17] = new EndNode(265, 705, null, "2A1");
         floorB[31] = new EndNode(248, 140, null, "1B");
@@ -156,7 +156,7 @@ class Map {
         floor1[57] = new EndNode(806, 448, null, "1012");
         floor1[63] = new EndNode(140,340, null, "1S01");
         floor1[68] = new EndNode(751,338, null, "Floor 1 Computing Commons Stairs");
-        floor1[69] = new EndNode(517,427, null, "1E01 Elevator");
+        floor1[69] = new EndNode(517,427, 0, "1E01 Elevator");
 
         // ----------Floor 2-----------
         let floor2 = this.Eaton.floor[2].nodes;
@@ -186,7 +186,7 @@ class Map {
         floor2[22] = new Node(786,385);
         floor2[23] = new EndNode(843,385, 2060, null);
         floor2[24] = new Node(898,385);
-        floor2[25] = new EndNode(438,365, null, "2E01 Elevator");
+        floor2[25] = new EndNode(438,365, 0, "2E01 Elevator");
         floor2[26] = new EndNode(521,365, 2010, null);
         floor2[27] = new Node(521,465);
         floor2[28] = new EndNode(450,465, null, "2002A");
@@ -293,7 +293,7 @@ class Map {
         floor3[7] = new Node(371,330);
         floor3[8] = new Node(415,330);
         floor3[9] = new Node(452,330);
-        floor3[10] = new EndNode(436,366, null, "3E01 Elevator");
+        floor3[10] = new EndNode(436,366, 0, "3E01 Elevator");
         floor3[11] = new Node(520,330);
         floor3[12] = new Node(550,330);
         floor3[13] = new Node(754,330);
@@ -965,6 +965,10 @@ class Pathfinder {
      * @return {number} The distance between the two nodes.
     */
     distanceBetween(node1, node2) {
+        if (node1 instanceof EndNode && node2 instanceof EndNode) {
+            if (node1.roomNumber === 0 && node2.roomNumber === 0) // Proper weighting for path between points on elevator
+                return 200;        
+        }
         return Math.sqrt( Math.pow(node1.x_coord - node2.x_coord, 2) + Math.pow(node1.y_coord - node2.y_coord, 2) );
     }
 
