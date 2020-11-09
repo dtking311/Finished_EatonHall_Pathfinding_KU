@@ -126,7 +126,7 @@ class Map {
         floor1[65] = new Node(114,263);
         floor1[66] = new Node(140,263);
         floor1[67] = new Node(694,368);
-        
+
         //Destination nodes
         floor1[0] = new EndNode(600, 465, null, "Stairs");
         floor1[4] = new EndNode(370, 277, null, "1005A");
@@ -967,7 +967,7 @@ class Pathfinder {
     distanceBetween(node1, node2) {
         if (node1 instanceof EndNode && node2 instanceof EndNode) {
             if (node1.roomNumber === -1 && node2.roomNumber === -1) // Proper weighting for path between points on elevator
-                return 200;        
+                return 200;
         }
         return Math.sqrt( Math.pow(node1.x_coord - node2.x_coord, 2) + Math.pow(node1.y_coord - node2.y_coord, 2) );
     }
@@ -1139,7 +1139,7 @@ svgThreeNode.setAttributeNS(null, "id", "created3Path");
 //------------------------------------------------------------------------------------------------------
 
 document.querySelector("#searchbutton").addEventListener('click',  function () {
-  
+
   //this resets the path so if the user uses the website repeatedly without refreshing the page, the old path is removed for the new one
   if (usedGFloor)
   {
@@ -1148,7 +1148,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
 
     svgGNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svgGNode.setAttributeNS(null, "id", "createdGPath");
-  
+
     usedGFloor = false;
   }
   if (usedOneFloor)
@@ -1336,14 +1336,14 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                 {
                   if ((last_coords[0] == "600" && last_coords[1] == "465") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427")) //went into stairs or elevator
                   {
-                    passedOneFloor = true;                   
+                    passedOneFloor = true;
                   }
                   else
                   {
                     svgOneNode.appendChild(tempNode);
-                    svgOneNode.appendChild(tempLine); 
+                    svgOneNode.appendChild(tempLine);
                   }
-                }                
+                }
                 usedOneFloor = true;
               }
               else if (floor2start)
@@ -1359,31 +1359,31 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                   {
                     if ((last_coords[0] == "600" && last_coords[1] == "465") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427")) //went into stairs or elevator
                     {
-                      passedOneFloor = true;                   
+                      passedOneFloor = true;
                     }
                     else
                     {
                       svgOneNode.appendChild(tempNode);
-                      svgOneNode.appendChild(tempLine); 
+                      svgOneNode.appendChild(tempLine);
                     }
-                  }                     
+                  }
                 }
                 else
                 {
                   if ((last_coords[0] == "619" && last_coords[1] == "297") || (last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "438" && last_coords[1] == "365") || (last_coords[0] == "926" && last_coords[1] == "452")) //went into stairs or elevator
                   {
-                    passedTwoFloor = true;                   
+                    passedTwoFloor = true;
                   }
                   else
                   {
                     svgTwoNode.appendChild(tempNode);
-                    svgTwoNode.appendChild(tempLine); 
+                    svgTwoNode.appendChild(tempLine);
                   }
-                }               
+                }
                 usedOneFloor = true;
                 usedTwoFloor = true;
               }
-              usedGFloor = true;             
+              usedGFloor = true;
             }
             else if (floor1vaild) //final destination is on the first floor
             {
@@ -1398,12 +1398,12 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                 {
                   if ((last_coords[0] == "120" && last_coords[1] == "251") || (last_coords[0] == "449" && last_coords[1] == "416") || (last_coords[0] == "380" && last_coords[1] == "379")) //went into stairs or elevator
                   {
-                    passedGFloor = true;                   
+                    passedGFloor = true;
                   }
                   else
                   {
                     svgGNode.appendChild(tempNode);
-                    svgGNode.appendChild(tempLine); 
+                    svgGNode.appendChild(tempLine);
                   }
                 }
                 usedGFloor = true;
@@ -1424,12 +1424,12 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                 {
                   if ((last_coords[0] == "619" && last_coords[1] == "297") || (last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "438" && last_coords[1] == "365") || (last_coords[0] == "926" && last_coords[1] == "452")) //went into stairs or elevator
                   {
-                    passedTwoFloor = true;                   
+                    passedTwoFloor = true;
                   }
                   else
                   {
                     svgTwoNode.appendChild(tempNode);
-                    svgTwoNode.appendChild(tempLine); 
+                    svgTwoNode.appendChild(tempLine);
                   }
                 }
                 usedTwoFloor = true;
@@ -1451,27 +1451,27 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                   {
                     if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1115" && last_coords[1] == "523")) //went into stairs or elevator
                     {
-                      passedOneFloor = true;                   
+                      passedOneFloor = true;
                     }
                     else
                     {
                       svgOneNode.appendChild(tempNode);
-                      svgOneNode.appendChild(tempLine); 
+                      svgOneNode.appendChild(tempLine);
                     }
-                  }                    
+                  }
                 }
                 else //still placing nodes on ground floor
                 {
                   if ((last_coords[0] == "120" && last_coords[1] == "251") || (last_coords[0] == "449" && last_coords[1] == "416") || (last_coords[0] == "380" && last_coords[1] == "379")) //went into stairs or elevator
                   {
-                    passedGFloor = true;                   
+                    passedGFloor = true;
                   }
                   else
                   {
                     svgGNode.appendChild(tempNode);
-                    svgGNode.appendChild(tempLine); 
+                    svgGNode.appendChild(tempLine);
                   }
-                }                
+                }
                 usedGFloor = true;
                 usedOneFloor = true;
               }
@@ -1486,20 +1486,20 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                 {
                   if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1115" && last_coords[1] == "523")) //went into stairs or elevator
                   {
-                    passedOneFloor = true;                   
+                    passedOneFloor = true;
                   }
                   else
                   {
                     svgOneNode.appendChild(tempNode);
-                    svgOneNode.appendChild(tempLine); 
+                    svgOneNode.appendChild(tempLine);
                   }
-                }                     
+                }
                 usedOneFloor = true;
               }
               else if (floor2start)
               {
                 svgTwoNode.appendChild(tempNode);
-                svgTwoNode.appendChild(tempLine);                
+                svgTwoNode.appendChild(tempLine);
               }
               usedTwoFloor = true;
             }
@@ -1520,12 +1520,12 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                     {
                       if ((last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "926" && last_coords[1] == "377") || (last_coords[0] == "438" && last_coords[1] == "365")) //went into stairs or elevator
                       {
-                        passedTwoFloor = true;                   
+                        passedTwoFloor = true;
                       }
                       else
                       {
                         svgTwoNode.appendChild(tempNode);
-                        svgTwoNode.appendChild(tempLine); 
+                        svgTwoNode.appendChild(tempLine);
                       }
                     }
                   }
@@ -1533,28 +1533,28 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                   {
                     if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1115" && last_coords[1] == "523")) //went into stairs or elevator
                     {
-                      passedOneFloor = true;                   
+                      passedOneFloor = true;
                     }
                     else
                     {
                       svgOneNode.appendChild(tempNode);
-                      svgOneNode.appendChild(tempLine); 
+                      svgOneNode.appendChild(tempLine);
                     }
-                  }                    
+                  }
                 }
                 else //still placing nodes on ground floor
                 {
                   if ((last_coords[0] == "120" && last_coords[1] == "251") || (last_coords[0] == "449" && last_coords[1] == "416") || (last_coords[0] == "380" && last_coords[1] == "379")) //went into stairs or elevator
                   {
-                    passedGFloor = true;                   
+                    passedGFloor = true;
                   }
                   else
                   {
                     svgGNode.appendChild(tempNode);
-                    svgGNode.appendChild(tempLine); 
+                    svgGNode.appendChild(tempLine);
                   }
-                }  
-                usedGFloor = true;                
+                }
+                usedGFloor = true;
                 usedOneFloor = true;
                 usedTwoFloor = true;
               }
@@ -1571,12 +1571,12 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                   {
                     if ((last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "926" && last_coords[1] == "377") || (last_coords[0] == "438" && last_coords[1] == "365")) //went into stairs or elevator
                     {
-                      passedTwoFloor = true;                   
+                      passedTwoFloor = true;
                     }
                     else
                     {
                       svgTwoNode.appendChild(tempNode);
-                      svgTwoNode.appendChild(tempLine); 
+                      svgTwoNode.appendChild(tempLine);
                     }
                   }
                 }
@@ -1584,14 +1584,14 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                 {
                   if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1115" && last_coords[1] == "523")) //went into stairs or elevator
                   {
-                    passedOneFloor = true;                   
+                    passedOneFloor = true;
                   }
                   else
                   {
                     svgOneNode.appendChild(tempNode);
-                    svgOneNode.appendChild(tempLine); 
+                    svgOneNode.appendChild(tempLine);
                   }
-                }                            
+                }
                 usedOneFloor = true;
                 usedTwoFloor = true;
               }
@@ -1606,14 +1606,14 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                 {
                   if ((last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "926" && last_coords[1] == "377") || (last_coords[0] == "438" && last_coords[1] == "365")) //went into stairs or elevator
                   {
-                    passedTwoFloor = true;                   
+                    passedTwoFloor = true;
                   }
                   else
                   {
                     svgTwoNode.appendChild(tempNode);
-                    svgTwoNode.appendChild(tempLine); 
+                    svgTwoNode.appendChild(tempLine);
                   }
-                }                
+                }
                 usedTwoFloor = true;
               }
               usedThreeFloor = true;
@@ -1681,14 +1681,151 @@ let floor1search = new Search(map.Eaton.floor[1].nodes);
 let floor2search = new Search(map.Eaton.floor[2].nodes);
 let floor3search = new Search(map.Eaton.floor[3].nodes);
 
+document.querySelector("#testbutton").addEventListener('click',  function () {
+console.log("________________________TESTING_________________________________");
+let pathfinder1 = new Pathfinder(map.nodeMap, map.Eaton.floor[0].nodes[0]);
+let p1 = pathfinder1.getPathTo(map.Eaton.floor[0].nodes[9]);
+console.log("Path from front entrance to Deans Office");
+while (p1.length > 0) {
+    let node = p1.pop();
+    console.log(node.x_coord + ' ' + node.y_coord);
+}
+
+let pathfinder2 = new Pathfinder(map.nodeMap, map.Eaton.floor[0].nodes[0]);
+let p2 = pathfinder2.getPathTo(map.Eaton.floor[1].nodes[4]);
+console.log("Path from front entrance to Career center");
+while (p2.length > 0) {
+    let node = p2.pop();
+    console.log(node.x_coord + ' ' + node.y_coord);
+}
+
+let pathfinder3 = new Pathfinder(map.nodeMap, map.Eaton.floor[0].nodes[0]);
+let p3 = pathfinder3.getPathTo(map.Eaton.floor[2].nodes[31]);
+console.log("Path from front entrance to EECS Department");
+while (p3.length > 0) {
+    let node = p3.pop();
+    console.log(node.x_coord + ' ' + node.y_coord);
+}
+
+let pathfinder4 = new Pathfinder(map.nodeMap, map.Eaton.floor[0].nodes[0]);
+let p4 = pathfinder4.getPathTo(map.Eaton.floor[3].nodes[15]);
+console.log("Path from front entrance to EECS Shop");
+while (p4.length > 0) {
+    let node = p4.pop();
+    console.log(node.x_coord + ' ' + node.y_coord);
+}
+
+let pathfinder5 = new Pathfinder(map.nodeMap, map.Eaton.floor[2].nodes[15]);
+let p5 = pathfinder5.getPathTo(map.Eaton.floor[0].nodes[11]);
+console.log("Path from Skywalk Entrance to Spahr Classroomr");
+while (p5.length > 0) {
+    let node = p5.pop();
+    console.log(node.x_coord + ' ' + node.y_coord);
+}
+
+let pathfinder6 = new Pathfinder(map.nodeMap, map.Eaton.floor[2].nodes[15]);
+let p6 = pathfinder6.getPathTo(map.Eaton.floor[1].nodes[4]);
+console.log("Path from Skywalk Entrance to Career center");
+while (p6.length > 0) {
+    let node = p6.pop();
+    console.log(node.x_coord + ' ' + node.y_coord);
+}
+
+let nametest;
+let nametestinput;
+
+console.log("is there a room 1a in Eaton");
+nametestinput = "1a"
+nametest = floorGsearch.vaildinput(nametestinput);
+if (nametest == true)
+{
+  console.log("it is a room in Eaton");
+}
+else
+{
+  console.log("it is not a room in Eaton");
+}
+
+console.log("is there a room 1010 in Eaton");
+
+nametestinput = "1010"
+nametest = floor1search.vaildinput(nametestinput);
+if (nametest == true)
+{
+  console.log("it is a room in Eaton");
+}
+else
+{
+  console.log("it is not a room in Eaton");
+}
+
+console.log("is there a room 1060 in Eaton");
+
+nametestinput = "1060"
+nametest = floor1search.vaildinput(nametestinput);
+if (nametest == true)
+{
+  console.log("it is a room in Eaton");
+}
+else
+{
+  console.log("it is not a room in Eaton");
+}
+
+console.log("is there a room 2010 in Eaton");
+
+nametestinput = "2010"
+nametest = floor2search.vaildinput(nametestinput);
+if (nametest == true)
+{
+  console.log("it is a room in Eaton");
+}
+else
+{
+  console.log("it is not a room in Eaton");
+}
+
+console.log("is there a room 2070 in Eaton");
+
+nametestinput = "2070"
+nametest = floor2search.vaildinput(nametestinput);
+if (nametest == true)
+{
+  console.log("it is a room in Eaton");
+}
+else
+{
+  console.log("it is not a room in Eaton");
+}
+
+console.log("is there a room 3010 in Eaton");
+
+nametestinput = "3010"
+nametest = floor3search.vaildinput(nametestinput);
+if (nametest == true)
+{
+  console.log("it is a room in Eaton");
+}
+else
+{
+  console.log("it is not a room in Eaton");
+}
+
+console.log("is there a room 3060 in Eaton");
+
+nametestinput = "3060"
+nametest = floor3search.vaildinput(nametestinput);
+if (nametest == true)
+{
+  console.log("it is a room in Eaton");
+}
+else
+{
+  console.log("it is not a room in Eaton");
+}
+
+console.log("__________________END_OF_TESTING_________________________");
+});
+
 document.getElementById("pageDefault").click();
 document.getElementById("pageDefault").focus();
-
-/*
-let pather = new Pathfinder(map.nodeMap, map.Eaton.floor[2].nodes[15]);
-let p = pather.getPathTo(map.Eaton.floor[1].nodes[52]);
-while(p.length > 0) {
-    let n = p.pop();
-    console.log(n.x_coord + ' ' + n.y_coord);
-}
-*/
