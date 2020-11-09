@@ -1231,6 +1231,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
     let floor2start = floor2search.vaildinput(startloaction);
     let floor3start = floor3search.vaildinput(startloaction);
 
+    //gets the number in the node array that the start location is
     if (floorgstart == true)
     {
       startnodenumber = floorGsearch.returnnodelocation(startloaction);
@@ -1248,6 +1249,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
       startnodenumber = floor3search.returnnodelocation(startloaction);
     }
 
+    //gets the number in the node array that the input location is and what
     let inputfloornum = 0;
     if (floorgvaild == true)
     {
@@ -1683,6 +1685,8 @@ let floor3search = new Search(map.Eaton.floor[3].nodes);
 
 document.querySelector("#testbutton").addEventListener('click',  function () {
 console.log("________________________TESTING_________________________________");
+
+//testing the pathfinder with diffrent locations
 let pathfinder1 = new Pathfinder(map.nodeMap, map.Eaton.floor[0].nodes[0]);
 let p1 = pathfinder1.getPathTo(map.Eaton.floor[0].nodes[9]);
 console.log("Path from front entrance to Deans Office");
@@ -1734,6 +1738,7 @@ while (p6.length > 0) {
 let nametest;
 let nametestinput;
 
+// testing the seach fuction with names too see if they are in the array
 console.log("is there a room 1a in Eaton");
 nametestinput = "1a"
 nametest = floorGsearch.vaildinput(nametestinput);
