@@ -1370,7 +1370,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                 }
                 else
                 {
-                  if ((last_coords[0] == "619" && last_coords[1] == "297") || (last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "438" && last_coords[1] == "365") || (last_coords[0] == "926" && last_coords[1] == "377")) //went into stairs or elevator
+                  if ((last_coords[0] == "619" && last_coords[1] == "297") || (last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "438" && last_coords[1] == "365") || (last_coords[0] == "926" && last_coords[1] == "452")) //went into stairs or elevator
                   {
                     passedTwoFloor = true;                   
                   }
@@ -1422,7 +1422,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                 }
                 else
                 {
-                  if ((last_coords[0] == "619" && last_coords[1] == "297") || (last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "438" && last_coords[1] == "365") || (last_coords[0] == "926" && last_coords[1] == "377")) //went into stairs or elevator
+                  if ((last_coords[0] == "619" && last_coords[1] == "297") || (last_coords[0] == "120" && last_coords[1] == "286") || (last_coords[0] == "438" && last_coords[1] == "365") || (last_coords[0] == "926" && last_coords[1] == "452")) //went into stairs or elevator
                   {
                     passedTwoFloor = true;                   
                   }
@@ -1449,7 +1449,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                   }
                   else
                   {
-                    if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1088" && last_coords[1] == "443")) //went into stairs or elevator
+                    if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1115" && last_coords[1] == "523")) //went into stairs or elevator
                     {
                       passedOneFloor = true;                   
                     }
@@ -1484,7 +1484,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                 }
                 else
                 {
-                  if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1088" && last_coords[1] == "443")) //went into stairs or elevator
+                  if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1115" && last_coords[1] == "523")) //went into stairs or elevator
                   {
                     passedOneFloor = true;                   
                   }
@@ -1531,7 +1531,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                   }
                   else
                   {
-                    if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1088" && last_coords[1] == "443")) //went into stairs or elevator
+                    if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1115" && last_coords[1] == "523")) //went into stairs or elevator
                     {
                       passedOneFloor = true;                   
                     }
@@ -1582,7 +1582,7 @@ document.querySelector("#searchbutton").addEventListener('click',  function () {
                 }
                 else
                 {
-                  if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1088" && last_coords[1] == "443")) //went into stairs or elevator
+                  if ((last_coords[0] == "751" && last_coords[1] == "338") || (last_coords[0] == "140" && last_coords[1] == "340") || (last_coords[0] == "517" && last_coords[1] == "427") || (last_coords[0] == "1115" && last_coords[1] == "523")) //went into stairs or elevator
                   {
                     passedOneFloor = true;                   
                   }
@@ -1684,9 +1684,11 @@ let floor3search = new Search(map.Eaton.floor[3].nodes);
 document.getElementById("pageDefault").click();
 document.getElementById("pageDefault").focus();
 
+/*
 let pather = new Pathfinder(map.nodeMap, map.Eaton.floor[2].nodes[15]);
 let p = pather.getPathTo(map.Eaton.floor[1].nodes[52]);
 while(p.length > 0) {
     let n = p.pop();
     console.log(n.x_coord + ' ' + n.y_coord);
 }
+*/
