@@ -1681,7 +1681,7 @@ let floor1search = new Search(map.Eaton.floor[1].nodes);
 let floor2search = new Search(map.Eaton.floor[2].nodes);
 let floor3search = new Search(map.Eaton.floor[3].nodes);
 
-
+document.querySelector("#testbutton").addEventListener('click',  function () {
 console.log("________________________TESTING_________________________________");
 let pathfinder1 = new Pathfinder(map.nodeMap, map.Eaton.floor[0].nodes[0]);
 let p1 = pathfinder1.getPathTo(map.Eaton.floor[0].nodes[9]);
@@ -1729,6 +1729,14 @@ console.log("Path from Skywalk Entrance to Career center");
 while (p6.length > 0) {
     let node = p6.pop();
     console.log(node.x_coord + ' ' + node.y_coord);
+}
+
+let pather = new Pathfinder(map.nodeMap, map.Eaton.floor[2].nodes[15]);
+let p = pather.getPathTo(map.Eaton.floor[1].nodes[52]);
+console.log("Path from Skywalk Entrance to room 1015");
+while(p.length > 0) {
+    let n = p.pop();
+    console.log(n.x_coord + ' ' + n.y_coord);
 }
 
 let nametest;
@@ -1825,13 +1833,7 @@ else
 }
 
 console.log("__________________END_OF_TESTING_________________________");
+});
 
 document.getElementById("pageDefault").click();
 document.getElementById("pageDefault").focus();
-
-let pather = new Pathfinder(map.nodeMap, map.Eaton.floor[2].nodes[15]);
-let p = pather.getPathTo(map.Eaton.floor[1].nodes[52]);
-while(p.length > 0) {
-    let n = p.pop();
-    console.log(n.x_coord + ' ' + n.y_coord);
-}
