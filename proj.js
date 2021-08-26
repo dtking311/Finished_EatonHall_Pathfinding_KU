@@ -1046,6 +1046,7 @@ class Pathfinder {
 //---------initialization of runtime vars-----------
 
 let map = new Map; // initialize node map
+let numFloors = map.Eaton.floor.length;
 
 // Create new svg div for each floor
 let groundFloor = document.getElementById('Eaton_g_floor_svg');
@@ -1070,6 +1071,8 @@ third_svg.setAttributeNS(null, "id", "thirdPath");
 thirdFloor.appendChild(third_svg);
 
 //-------end initialization------------
+
+//-------Search Functions---------------
 
 let roomnumber, roomname;
 /**
@@ -1101,6 +1104,19 @@ function search(key) {
 	return map.nodeMap.find(isEndNode);
 }
 
+/**
+ * Determines the floor the given node resides on
+ * @param {Node} node
+ * @return {Number} the index of the floor in the Building's array of floors, or -1 if the node was not found.
+ */
+function getFloor(node) {
+    for (let i = 0; i < numFloors; i++) {
+        if (map.Eaton.floor[i].nodes.includes(node))
+            return i;
+    }
+    return -1;
+}
+
 //-------Runtime code-------
 document.querySelector("#searchbutton").addEventListener('click', function () {
 
@@ -1113,7 +1129,49 @@ document.querySelector("#searchbutton").addEventListener('click', function () {
 		alert("Not a valid destination");
 		return;
 	}
-	// Path vars
+
+	// Pathfinding
+	let pather = new Pathfinder(map.nodeMap, startNode);
+	let path = pather.getPathTo(destinationNode);
+
+	// Drawing Path
+	let groundVisited = false; // change to array of bools
+	let groundPath;
+	while (path.length > 0) {
+		let n = path.pop(); // pop a node off of the path array.
+		console.log(getFloor(n));
+		if (!groundVisited) {
+			groundPath = 'M' + n.x_coord + ' ' + n.y_coord;
+			groundVisited = true;
+		} else {
+			groundPath += ' L' + n.x_coord + ' ' + n.y_coord;
+		}
+	}
+
+	if (groundVisited) {
+		console.log(groundPath);
+		let tempPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+		tempPath.setAttributeNS(null, 'd', groundPath);
+		tempPath.setAttributeNS(null, 'stroke', 'blue');
+		tempPath.setAttributeNS(null, 'stroke-width', '5');
+		tempPath.setAttributeNS(null, 'fill', 'transparent');
+		ground_svg.appendChild(tempPath);
+	}
+
+	let tempNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+	tempNode.setAttributeNS(null, 'cx', startNode.x_coord);
+	tempNode.setAttributeNS(null, 'cy', startNode.y_coord);
+	tempNode.setAttributeNS(null, 'r', '7');
+	tempNode.setAttributeNS(null, 'fill', 'red');
+	ground_svg.appendChild(tempNode);
+
+	tempNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+	tempNode.setAttributeNS(null, 'cx', destinationNode.x_coord);
+	tempNode.setAttributeNS(null, 'cy', destinationNode.y_coord);
+	tempNode.setAttributeNS(null, 'r', '7');
+	tempNode.setAttributeNS(null, 'fill', 'blue');
+	ground_svg.appendChild(tempNode);
+	
 });
 
 //--------------------------------End Runtime-------------------------------
