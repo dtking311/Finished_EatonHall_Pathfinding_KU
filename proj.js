@@ -1055,7 +1055,7 @@ let secondFloor = document.getElementById('Eaton_2_floor_svg');
 let thirdFloor = document.getElementById('Eaton_3_floor_svg');
 
 let ground_svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-ground_svg.setAttributeNS(null, "id", "groundPath");
+ground_svg.setAttributeNS(null, "id", "groundPath"); // used for label in inspect element
 groundFloor.appendChild(ground_svg);
 
 let first_svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
@@ -1069,6 +1069,8 @@ secondFloor.appendChild(second_svg);
 let third_svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 third_svg.setAttributeNS(null, "id", "thirdPath");
 thirdFloor.appendChild(third_svg);
+
+let svg = [ground_svg, first_svg, second_svg, third_svg];
 
 //-------end initialization------------
 
@@ -1120,6 +1122,13 @@ function getFloor(node) {
 //-------Runtime code-------
 document.querySelector("#searchbutton").addEventListener('click', function () {
 
+    // Clearing any previous path drawings
+    for (let i = 0; i < numFloors; i++) {
+        while (svg[i].firstChild) {
+            svg[i].removeChild(svg[i].firstChild);
+        }
+    }
+
 	// Perform search
 	roomname = document.getElementById("starting_location").value;
 	let startNode = search(roomname);
@@ -1135,27 +1144,32 @@ document.querySelector("#searchbutton").addEventListener('click', function () {
 	let path = pather.getPathTo(destinationNode);
 
 	// Drawing Path
-	let groundVisited = false; // change to array of bools
-	let groundPath;
-	while (path.length > 0) {
-		let n = path.pop(); // pop a node off of the path array.
-		console.log(getFloor(n));
-		if (!groundVisited) {
-			groundPath = 'M' + n.x_coord + ' ' + n.y_coord;
-			groundVisited = true;
-		} else {
-			groundPath += ' L' + n.x_coord + ' ' + n.y_coord;
-		}
+    let visited = new Array(numFloors);
+    visited.fill(false);
+    let pathStr = new Array(numFloors);
+    pathStr.fill("");
+
+    while (path.length > 0) {
+        let n = path.pop(); // pop a node off of the path array.
+        let floor = getFloor(n);
+		
+        if (!visited[floor]) {
+            pathStr[floor] = 'M' + n.x_coord + ' ' + n.y_coord;
+            visited[floor] = true;
+        } else {
+            pathStr[floor] += ' L' + n.x_coord + ' ' + n.y_coord;
+        }
 	}
 
-	if (groundVisited) {
-		console.log(groundPath);
-		let tempPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-		tempPath.setAttributeNS(null, 'd', groundPath);
-		tempPath.setAttributeNS(null, 'stroke', 'blue');
-		tempPath.setAttributeNS(null, 'stroke-width', '5');
-		tempPath.setAttributeNS(null, 'fill', 'transparent');
-		ground_svg.appendChild(tempPath);
+    for (let i = 0; i < numFloors; i++) {
+        if (visited[i]) {
+            let tempPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            tempPath.setAttributeNS(null, 'd', pathStr[i]);
+            tempPath.setAttributeNS(null, 'stroke', 'blue');
+            tempPath.setAttributeNS(null, 'stroke-width', '5');
+            tempPath.setAttributeNS(null, 'fill', 'transparent');
+            svg[i].appendChild(tempPath);
+        }
 	}
 
 	let tempNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
@@ -1163,14 +1177,14 @@ document.querySelector("#searchbutton").addEventListener('click', function () {
 	tempNode.setAttributeNS(null, 'cy', startNode.y_coord);
 	tempNode.setAttributeNS(null, 'r', '7');
 	tempNode.setAttributeNS(null, 'fill', 'red');
-	ground_svg.appendChild(tempNode);
+	svg[getFloor(startNode)].appendChild(tempNode);
 
 	tempNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
 	tempNode.setAttributeNS(null, 'cx', destinationNode.x_coord);
 	tempNode.setAttributeNS(null, 'cy', destinationNode.y_coord);
 	tempNode.setAttributeNS(null, 'r', '7');
 	tempNode.setAttributeNS(null, 'fill', 'blue');
-	ground_svg.appendChild(tempNode);
+	svg[getFloor(destinationNode)].appendChild(tempNode);
 	
 });
 
